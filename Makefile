@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/07 16:48:38 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/08 01:43:28 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ SRCS_NAME		= main.c\
 					heredoc.c\
 					lst_utils.c\
 					settings.c\
+					gnl.c\
 					builtin_echo.c\
 					builtin_pwd.c\
 					builtin_exit.c\

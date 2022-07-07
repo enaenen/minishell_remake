@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/07 22:22:42 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/08 01:43:04 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@
 # define ERROR -1
 # define S_QUOTE 1
 # define D_QUOTE 2
+
+// GNL ASSETS
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 256
+# endif
+
+# define SUCCESS 1
+# define END_OF_FILE 0
+// GNL ASSETS END
 
 extern char			**environ;
 int					g_status;
@@ -100,6 +113,8 @@ void	init_set2(t_set	*set, char ***envp, t_env *env);
 
 int		check_builtin_cmd(t_list *cmd);
 void	execute_builtin_cmd(t_proc *proc, char **exe);
+/* GNL*/
+char	*get_next_line(int fd);
 
 /* BUILTIN COMMANDS */
 void	ft_pwd(void);
