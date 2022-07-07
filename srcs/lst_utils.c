@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:51:29 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/03 21:04:02 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/07 21:28:54 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,15 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 		ft_lstlast(*lst)->next = new;
 }
 
-void	env_lstadd_back(t_env **lst, t_env *new, char *key, char *value)
+void	env_lstadd_back(t_env **lst, char *key, char *value)
 {
+	t_env	*new;
 	t_env	*phead;
 
 	new = (t_env *)malloc(sizeof(t_env));
 	new->key = key;
 	new->value = value;
 	new->next = NULL;
-	// new->print_check = 0;
 	if (*lst == NULL)
 	{
 		*lst = new;

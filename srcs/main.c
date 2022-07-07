@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:28:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/07 15:33:19 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/07 23:34:15 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	ft_lstprint(t_list *lst)
 		ft_putstr("\n");
 		lst = lst->next;
 	}
-		
+
 }
 /*========== LinkedList END===========*/
 
@@ -88,7 +88,7 @@ int		 find_valid_quot_point(char *data, int start)
  * 	"echo abc >" AND "a.txt"
  **/
 
-int		split_redirection_token(char *input, int i, t_list **token)
+int		split_redirection_token(char *input, int i, t_token **token)
 {
 	char	*tmp;
 	int		save;
@@ -99,7 +99,7 @@ int		split_redirection_token(char *input, int i, t_list **token)
 		tmp = ft_strntrim(input, " ", i);
 		if (!tmp)
 			return (error_msg("malloc"));
-		ft_lstadd_back(token, ft_lstnew(tmp));
+		env_lstadd_back(token, tmp, NULL);
 		input = &input[i];
 		i = 0;
 	}
@@ -108,11 +108,11 @@ int		split_redirection_token(char *input, int i, t_list **token)
 	tmp = ft_strntrim(input, " ", i);
 	if (!tmp)
 		return (error_msg("malloc"));
-	ft_lstadd_back(token, ft_lstnew(tmp));
+	env_lstadd_back(token, tmp, NULL);
 	return (i + save);
 }
 
-int	split_space_token(char *input, int i, t_list **token)
+int	split_space_token(char *input, int i, t_token **token)
 {
 	char	*tmp;
 
@@ -121,7 +121,7 @@ int	split_space_token(char *input, int i, t_list **token)
 		tmp = ft_strntrim(input, " ", i);
 		if (!tmp)
 			return (error_msg("malloc"));
-		ft_lstadd_back(token, ft_lstnew(tmp));
+		env_lstadd_back(token, tmp, NULL);
 	}
 	while (input[i] == ' ')
 		i++;
@@ -134,7 +134,7 @@ int	split_space_token(char *input, int i, t_list **token)
  * 	"echo abc" AND "|"" AND "ls -l"
  **/
 
-int		split_pipe_token(char *input, int i, t_list **token)
+int		split_pipe_token(char *input, int i, t_token **token)
 {
 	char	*tmp;
 
@@ -143,31 +143,30 @@ int		split_pipe_token(char *input, int i, t_list **token)
 		tmp = ft_strntrim(input, " ", i);
 		if (!tmp)
 			return (error_msg("malloc"));
-		ft_lstadd_back(token, ft_lstnew(tmp));
+		env_lstadd_back(token, tmp, NULL);
 	}
 	tmp = ft_strdup("|");
 	if (!tmp)
 		return (error_msg("malloc"));
-		
-	ft_lstadd_back(token, ft_lstnew(tmp));
+	env_lstadd_back(token, tmp, NULL);
 	return (i + 1);
 }
 
-int		split_rest_token(char *input, t_list **token)
+int		split_rest_token(char *input, t_token **token)
 {
 	char	*tmp;
-	
+
 	if (input[0])
 	{
 		tmp = ft_strntrim(input, " ", ft_strlen(input));
 		if (!tmp)
 			return (error_msg("malloc"));
-		ft_lstadd_back(token, ft_lstnew(tmp));
+		env_lstadd_back(token, tmp, NULL);
 	}
 	return (TRUE);
 }
 
-int		split_token(char *input, t_list **token)
+int		split_token(char *input, t_token **token)
 {
 	int	i;
 
@@ -199,7 +198,7 @@ int		split_token(char *input, t_list **token)
 
 /* CHECK TOKEN */
 
-int		check_token(t_list	*token)
+int		check_token(t_token	*token)
 {
 	int	i;
 
@@ -207,22 +206,22 @@ int		check_token(t_list	*token)
 	while (token)
 	{
 		// | 나 ||밖에없을때
-		if (token->data[0] == '|' && (i == 0 
-			|| !token->next || token->next->data[0] == '|'))
+		if (token->key[0] == '|' && (i == 0
+			|| !token->next || token->next->key[0] == '|'))
 			return (error_msg("|"));
 		// < | > 관련 에러처리
-		else if (token->data[0] == '<' || token->data[0] == '>')
-		{	
-			if (token->data[1] && token->data[0] != token->data[1])
-				return (error_msg(&token->data[1]));
-			else if (2 < ft_strlen(token->data))
-				return (error_msg(&token->data[2]));
+		else if (token->key[0] == '<' || token->key[0] == '>')
+		{
+			if (token->key[1] && token->key[0] != token->key[1])
+				return (error_msg(&token->key[1]));
+			else if (2 < ft_strlen(token->key))
+				return (error_msg(&token->key[2]));
 			else if (!token->next)
 				return (error_msg(NULL));
-			else if (token->next->data[0] == '<'
-				|| token->next->data[0] == '>'
-				|| token->next->data[0] == '|')
-				return (error_msg(token->next->data));
+			else if (token->next->key[0] == '<'
+				|| token->next->key[0] == '>'
+				|| token->next->key[0] == '|')
+				return (error_msg(token->next->key));
 		}
 		i++;
 		token = token->next;
@@ -253,7 +252,7 @@ char	*ms_strtrim(char *data, int start, int end)
 	return (ret);
 }
 
-// data를 받아 data +1 부터 $ 토큰을 찾음 
+// data를 받아 data +1 부터 $ 토큰을 찾음
 int		find_env_var_token(char *data, int start, int end)
 {
 	int	find;
@@ -265,7 +264,7 @@ int		find_env_var_token(char *data, int start, int end)
 		return (FALSE);
 	return (TRUE);
 }
-/** env 해석 
+/** env 해석
  * read_key env 해석 하여 key의 value 값 가져옴
  * strjoin 으로 합치기
  * **/
@@ -295,7 +294,7 @@ char	*parse_pre_env_var(char *data, int start, char *new_data)
 	ft_free(tmp);
 	ft_free(org_data);
 	return (new_data);
-	
+
 }
 
 
@@ -360,7 +359,7 @@ char	*expand_int_quot_utils(t_proc *proc, char *data, char **new_data)
 char	*expand_in_quot_utils(t_proc *proc, char *data, char **new_data)
 {
 	int i;
-	
+
 	i = -1;
 	while (data[++i])
 	{
@@ -429,7 +428,7 @@ char	*del_small_quot_token(char *data, int start, char **new_data)
 	int		end;
 	char	*tmp;
 	char	*org_data;
-	
+
 	org_data = *new_data;
 	end = find_valid_quot_point(data, start);
 	tmp = ms_strtrim(data, start, end);
@@ -463,73 +462,213 @@ char	*expand_in_quot_uitls(t_proc *proc, char *data, char **new)
 	}
 	return (data);
 }
+
+int	is_quote(char c)
+{
+	if (c == '\'')
+		return (S_QUOTE);
+	else if (c == '"')
+		return (D_QUOTE);
+	return (0);
+}
+
+char	*skip_quote(t_buffer buf, char *data, int q_flag)
+{
+	data++;
+	while (is_quote(*data) != q_flag)
+	{
+		add_char(buf, *data);
+		data++;
+	}
+	return (data);
+}
+
+char	*skip_quote_2(t_buffer buf, char *data, int q_flag)
+{
+	add_char(buf, *data);
+	data++;
+	while (is_quote(*data) != q_flag)
+	{
+		add_char(buf, *data);
+		data++;
+	}
+	add_char(buf, *data);
+	return (data);
+}
+
+char	*rm_quote(t_porc *porc, char *data)
+{
+	t_buffer	*buf;
+	char		*str;
+
+	buf = create_buf();
+	while (*data)
+	{
+		if (is_quote(*data))
+			data = skip_quote(buf, data, is_quote(*data));
+		else
+			add_char(buf, *data);
+		data++;
+	}
+	str = put_str(buf);
+	del_buf(buf);
+	return (str);
+}
+
+char	*repalce_env_val(t_env *env, t_buffer *buf, char *data)
+{
+	char	*key;
+	char	*str;
+	int		i;
+
+	i = 1;
+	if (*(data + 1) == '?')
+		str = ft_itoa(g_status);
+	else if (*(data + 1) == NULL)
+		str = ft_strdup("$");
+	else if (ft_isdigit(*(data + 1)))
+		str = NULL;
+	else
+	{
+		while (data[i] && (ft_isalnum(data[i]) || data[i] == '_'))
+			i++;
+		if (i == 1)
+			str = ft_substr(data, 0, 2);
+		else
+		{
+			key = ft_substr(data, 1, i);
+			str = read_key(env, key);
+			free(key);
+		}
+	}
+	add_str(buf, str);
+	free(str);
+	return (data);
+}
+
 //malloc error
 char	*expand_data(t_proc *proc, char *data)
 {
-	char	*new_data;
-	char	*tmp;
+	t_buffer	*buf;
+	char		*str;
+
+	buf = create_buf();
+	while (*data)
+	{
+		if (is_quote(*data) == S_QUOTE)
+			data = skip_quote_2(buf, data, S_QUOTE);
+		else if (*data == '$')
+			data = replace_env_val(proc->env_list, buf, data);
+		else
+			add_char(buf, *data);
+		if (data == NULL)
+			break ;
+		data++;
+	}
+	str = put_str(buf);
+	del_buf(buf);
+	return (str);
+}
+
+char	*skip_space(char *str)
+{
+	while (*str)
+	{
+		if (*str != ' ')
+			break ;
+		str++;
+	}
+	return (str);
+}
+
+char	**lst_to_strs(t_list *lst)
+{
+	t_list	*tmp;
+	char	**strs;
 	int		i;
 
-	i = -1;
-	new_data = NULL;
-	while (data[++i])
+	i = 0;
+	tmp = lst;
+	while (tmp)
 	{
-		// ' " 제거
-		if (data[i] == '\'' && i != find_valid_quot_point(data, i))
-			data = del_small_quot_token(data, i, &new_data);
-		else if (data[i] == '\"' && i != find_valid_quot_point(data, i))
-			data = del_big_quot(proc, data, i, &new_data);
-		else if (data[i] == '$')
-			data = expand_env_var(proc, data, i, &new_data);
-		else
-			continue;
-		if (!data)
-			return (ft_free(new_data));
-		i = -1;
+		i++;
+		tmp = tmp->next;
 	}
-	tmp = new_data;
-	new_data = ft_strjoin(new_data, data);
-	ft_free(tmp);
-	// printf("new_data = %s\n",new_data);
-
-	return (new_data);
+	strs = malloc(sizeof(char *) * (i + 1));
+	strs[i] = NULL;
+	i = 0;
+	while (lst)
+	{
+		strs[i++] = lst->data;
+		lst = lst->next;
+	}
+	return (strs);
 }
 
-// >>  << < > 일때 리다이렉션 처리
-int		parse_std_inout_redirection(t_proc *proc, t_list *data, char *tmp)
+char	**split_skip_quote(char *str)
 {
-	if (ft_strncmp(data->data, "<<", 3) == 0)
-		ft_lstadd_back(&proc->limiter, ft_lstnew(ft_strdup(tmp)));
-	if (ft_strncmp(data->data, "<", 3) == 0)
+	t_buffer	*buf;
+	t_list		*tmp_lst;
+	char		**strs;
+
+	tmp_lst = NULL;
+	buf = create_buf();
+	while (*str)
 	{
-		proc->infile = open(tmp, O_RDONLY);
-		if (proc->infile < 0)
+		if (is_quote(*str))
+			str = skip_quote_2(buf, str, is_quote(*str));
+		else if (*str != ' ')
+			add_char(buf, *str);
+		else
 		{
-			error_msg(tmp);
-			ft_free(tmp);
-			return (ERROR);
+			str = skip_space(str);
+			ft_lstadd_back(&tmp_lst, put_str(buf));
+			if (*str == NULL)
+				break ;
 		}
-		dup2(proc->infile, STDIN_FILENO);
+		str++;
 	}
-	if (ft_strncmp(data->data, ">>", 3) == 0)
-		proc->outfile = open(tmp, O_WRONLY | O_CREAT | O_APPEND, 0644);
-	else if (ft_strncmp(data->data, ">", 2) == 0)
-		proc->outfile = open(tmp, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-	if (proc->outfile < 0)
-	{
-			error_msg(tmp);
-			ft_free(tmp);
-			return (ERROR);
-	}
-	return (TRUE);
+	strs = lst_to_strs(tmp_lst);
+	ft_lstclear(&tmp_lst, free);
+	del_buf(buf);
+	return (strs);
 }
 
-int		parse_data(t_proc *proc, t_list *data)
+// >>  << < > 일때 리다이렉션 처리 --> apply redirection
+// int		parse_std_inout_redirection(t_proc *proc, t_token *tokens, char *tmp)
+// {
+// 	if (ft_strncmp(tokens->key, "<<", 3) == 0)
+// 		env_lstadd_back(&proc->limiter, tmp, NULL));
+// 	if (ft_strncmp(tokens->key, "<", 3) == 0)
+// 	{
+// 		proc->infile = open(tmp, O_RDONLY);
+// 		if (proc->infile < 0)
+// 		{
+// 			error_msg(tmp);
+// 			ft_free(tmp);
+// 			return (ERROR);
+// 		}
+// 		dup2(proc->infile, STDIN_FILENO);
+// 	}
+// 	if (ft_strncmp(tokens->key, ">>", 3) == 0)
+// 		proc->outfile = open(tmp, O_WRONLY | O_CREAT | O_APPEND, 0644);
+// 	else if (ft_strncmp(tokens->key, ">", 2) == 0)
+// 		proc->outfile = open(tmp, O_WRONLY | O_CREAT | O_TRUNC, 0644);
+// 	if (proc->outfile < 0)
+// 	{
+// 			error_msg(tmp);
+// 			ft_free(tmp);
+// 			return (ERROR);
+// 	}
+// 	return (TRUE);
+// }
+
+int		parse_data(t_proc *proc, t_token *tokens)
 {
 	char	*tmp;
-	while (data)
+	while (tokens)
 	{
-		if (data->data[0] == '<' || data->data[0] == '>')
+		if (tokens->key[0] == '<' || tokens->key[0] == '>')
 		{
 			tmp = expand_data(proc, data->next->data);
 			if (!tmp)
@@ -537,11 +676,11 @@ int		parse_data(t_proc *proc, t_list *data)
 			else if (parse_std_inout_redirection(proc, data, tmp) == ERROR)
 				return (ERROR);
 			ft_free(tmp);
-			data = data->next;
+			tokens = tokens->next;
 		}
 		else
 		{
-			tmp = expand_data(proc, data->data);
+			tmp = expand_data(proc, tokens->key);
 			if (!tmp)
 				return (error_msg("malloc"));
 			ft_lstadd_back(&proc->cmd, ft_lstnew(tmp));
@@ -633,10 +772,10 @@ int		handle_cmd(t_proc *proc, t_list *cmd, char **envp)
 {
 	int		fd[2];
 	pid_t	pid;
-	
+
 	signal(SIGINT, &sig_exec);
 	signal(SIGQUIT, &sig_exec);
-	
+
 	if (pipe(fd) == -1)
 		return (error_msg("pipe"));
 	pid = fork();
@@ -787,7 +926,7 @@ int		parse_pipe_token(t_list *token, t_env *env)
 		if (token->data[0] != '|')
 		{
 			tmp = ft_strdup(token->data);
-		
+
 			if (!tmp)
 				return (error_msg("malloc"));
 			ft_lstadd_back(&proc.data, ft_lstnew(tmp));
@@ -814,9 +953,9 @@ int		parse_pipe_token(t_list *token, t_env *env)
 
 void	parse_input(char *input, t_env *env)
 {
-	t_list	*token;
+	t_token	*token;
 
-	token = 0;
+	token = NULL;
 	add_history(input);
 	if (split_token(input, &token) == TRUE && check_token(token) == TRUE)
 	{

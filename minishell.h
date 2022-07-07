@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/07 03:21:48 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/07 22:22:42 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,11 @@
 # include "libft.h"
 
 # define ERROR -1
+# define S_QUOTE 1
+# define D_QUOTE 2
 
-extern char	**environ;
-int			g_status;
+extern char			**environ;
+int					g_status;
 
 typedef struct s_list
 {
@@ -41,11 +43,20 @@ typedef struct s_list
 
 typedef struct s_env
 {
-	char 			*key;
-	char 			*value;
+	char			*key;
+	char			*value;
 	struct s_env	*next;
-	int				print_check;
 }	t_env;
+
+typedef t_env		t_token;
+typedef t_env		t_redir;
+
+typedef struct s_cmd
+{
+	t_token			*tokens;
+	t_redir			*redir;
+	struct s_cmd	*next;
+}	t_cmd;
 
 typedef struct s_set
 {
@@ -58,9 +69,7 @@ typedef struct s_set
 typedef struct s_proc
 {
 	t_env	*env_list;
-	t_list	*data;
-	t_list	*cmd;
-	t_list	*limiter;
+	t_token	*tokens;
 	int		infile;
 	int		outfile;
 	int		pipe_flag;
@@ -78,7 +87,7 @@ void	sig_readline(int sig);
 /** LIST UTILS **/
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-void	env_lstadd_back(t_env **lst, t_env *new, char *key, char *value);
+void	env_lstadd_back(t_env **lst, char *key, char *value);
 t_list	*ft_lstnew(void *data);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 int		ft_lstsize(t_list *lst);

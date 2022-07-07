@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 18:43:23 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/04 20:02:15 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/07 20:38:43 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,6 @@ int	export_key_syntax_check(char *s)
 	return (1);
 }
 
-void	reset_env_print_check(t_env *env_list)
-{
-	t_env	*i;
-
-	i = env_list;
-	while (i)
-	{
-		i->print_check = 0;
-		i = i->next;
-	}
-}
-
 void	print_export(t_env *env_list)
 {
 	t_env	*i;
@@ -90,7 +78,6 @@ void	print_export(t_env *env_list)
 		i = env_list;
 	}
 	i = env_list;
-	reset_env_print_check(env_list);
 }
 
 void	ft_export(char **buf, t_env *env_list, char **splits, t_env *tmp)
