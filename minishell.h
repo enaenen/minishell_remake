@@ -105,15 +105,17 @@ t_list	*ft_lstnew(void *data);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 int		ft_lstsize(t_list *lst);
 
+/* ENVIRONMENT SETTINGS */
 void	set_env_node(t_env **env, char *key, char *val);
 t_env	*find_env_node(t_env *env_list, char *key);
+char	**get_env_list(t_env **env_list);
 
 void	init_set(t_set *set, t_env **env);
 void	init_set2(t_set	*set, char ***envp, t_env *env);
-
 int		check_builtin_cmd(t_list *cmd);
 void	execute_builtin_cmd(t_proc *proc, char **exe);
-/* GNL*/
+
+/* GET_NEXT_LINE */
 char	*get_next_line(int fd);
 
 /* BUILTIN COMMANDS */
@@ -125,9 +127,5 @@ int		ft_env(t_env *env_list);
 int		ft_cd2(t_proc *proc, char **cmd);
 void	ft_export(char **buf, t_env *env_list, char **splits, t_env *temp);
 void	ft_unset(char **buf, t_env **env_list);
-
-char	**get_env_list(t_env **env_list);
-
-
 
 #endif
