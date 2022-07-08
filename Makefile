@@ -6,7 +6,11 @@
 #    By: seseo <seseo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
+<<<<<<< HEAD
 #    Updated: 2022/07/08 18:41:33 by seseo            ###   ########.fr        #
+=======
+#    Updated: 2022/07/08 01:43:28 by wchae            ###   ########.fr        #
+>>>>>>> 7a21d02c9164f3a04d2507999a909b95323f6fd5
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +33,7 @@ SRCS_NAME		= main.c\
 					heredoc.c\
 					lst_utils.c\
 					settings.c\
+					gnl.c\
 					builtin_echo.c\
 					builtin_pwd.c\
 					builtin_exit.c\
