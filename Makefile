@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
+#    By: seseo <seseo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/07 16:48:38 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/08 18:41:33 by seseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ READLINE_LIB = $(READLINE_DIR)
 READLINE = $(READLINE_DIR)/libreadline.a
 
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -g -fsanitize=address,undefined
+CFLAGS		= -Wall -Werror -Wextra #-g -fsanitize=address,undefined
 
 INCS		= -Ilibft -I.
 
@@ -25,6 +25,7 @@ SRCS_DIR		= srcs
 SRCS_NAME		= main.c\
 					sig_handler.c\
 					exe_handler.c\
+					heredoc_gnl.c\
 					heredoc.c\
 					lst_utils.c\
 					settings.c\
@@ -35,7 +36,7 @@ SRCS_NAME		= main.c\
 					builtin_env.c\
 					builtin_export.c\
 					builtin_unset.c\
-					env_utils.c\
+					env_utils.c
 
 SRCS			= $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 

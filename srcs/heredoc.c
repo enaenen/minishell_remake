@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:19:21 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/07 21:05:09 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/08 18:38:46 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,11 @@ static void	heredoc_child(char *limiter, int *fd)
 		line = readline(">");
 		if (!line)
 			break ;
+		if (ft_strncmp(line, limiter, -1) == 0)
+		{
+			free(line);
+			break ;
+		}
 		add_str(buf, line);
 		add_char(buf, '\n');
 		free(line);
@@ -51,6 +56,7 @@ char	*here_doc_parent(int fd)
 	}
 	str = put_str(buf);
 	del_buf(buf);
+	return (str);
 }
 
 static char	*ft_heredoc(char *limiter)
@@ -61,10 +67,10 @@ static char	*ft_heredoc(char *limiter)
 	pid_t		pid;
 
 	if (pipe(fd) == -1)
-		return (error_msg("pipe"));
+		return (NULL);
 	pid = fork();
 	if (pid == -1)
-		return (error_msg("fork"));
+		return (NULL);
 	if (pid == 0)
 		heredoc_child(limiter, fd);
 	close(fd[1]);
@@ -76,18 +82,22 @@ static char	*ft_heredoc(char *limiter)
 	return (str);
 }
 
-void	process_heredoc(t_list *token)
+int	process_heredoc(t_token *token)
 {
-	int	org_stdin;
+	char	*str;
 
 	signal(SIGINT, &sig_here_doc);
 	while (token)
 	{
-		if (ft_strncmp(token->data, "<<", 3) == 0)
+		if (ft_strncmp(token->key, "<<", 3) == 0)
 		{
-			ft_heredoc(token->next->data);
+			str = ft_heredoc(token->next->key);
+			if (str == NULL)
+				return (EXIT_FAILURE);
+			token->value = str;
 			token = token->next;
 		}
 		token = token->next;
 	}
+	return (EXIT_SUCCESS);
 }

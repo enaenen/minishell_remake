@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lst_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:51:29 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/07 21:28:54 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/08 17:52:09 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,56 @@ void	env_lstadd_back(t_env **lst, char *key, char *value)
 	while (phead->next)
 		phead = phead->next;
 	phead->next = new;
+}
+
+void	env_lstadd_back_node(t_env **lst, t_env	*node)
+{
+	t_env	*phead;
+
+	if (*lst == NULL)
+	{
+		*lst = node;
+		return ;
+	}
+	phead = *lst;
+	while (phead->next)
+		phead = phead->next;
+	phead->next = node;
+}
+
+void	cmd_lstadd_back(t_cmd **lst, t_token *tokens)
+{
+	t_cmd	*new;
+	t_cmd	*phead;
+
+	new = malloc(sizeof(t_cmd));
+	new->tokens = tokens;
+	new->redir = NULL;
+	new->next = NULL;
+	if (*lst == NULL)
+	{
+		*lst = new;
+		return ;
+	}
+	phead = *lst;
+	while (phead->next)
+		phead = phead->next;
+	phead->next = new;
+}
+
+void	del_env_lst(t_env *lst)
+{
+	t_env	*tmp;
+
+	tmp = lst;
+	while (tmp)
+	{
+		tmp = lst->next;
+		free(lst->key);
+		free(lst->value);
+		free(lst);
+		lst = tmp;
+	}
 }
 
 t_list	*ft_lstnew(void *data)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42seoul.kr>           +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/07 22:22:42 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/08 18:41:02 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@
 # define ERROR -1
 # define S_QUOTE 1
 # define D_QUOTE 2
+
+// GNL ASSETS
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 32
+# endif
+
+# ifndef OPEN_MAX
+#  define OPEN_MAX 256
+# endif
+
+# define SUCCESS 1
+# define END_OF_FILE 0
+// GNL ASSETS END
 
 extern char			**environ;
 int					g_status;
@@ -79,7 +92,7 @@ typedef struct s_proc
 int		error_msg(char *msg);
 void	ft_sig_handler(int status);
 void	sig_here_doc(int sig);
-void	process_heredoc(t_list *token);
+int		process_heredoc(t_token *token);
 void	sig_here_doc_child(int sig);
 void	sig_exec(int sig);
 void	sig_readline(int sig);
@@ -87,10 +100,14 @@ void	sig_readline(int sig);
 /** LIST UTILS **/
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-void	env_lstadd_back(t_env **lst, char *key, char *value);
 t_list	*ft_lstnew(void *data);
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 int		ft_lstsize(t_list *lst);
+
+void	env_lstadd_back(t_env **lst, char *key, char *value);
+void	env_lstadd_back_node(t_env **lst, t_env	*node);
+void	del_env_lst(t_env *lst);
+void	cmd_lstadd_back(t_cmd **lst, t_token *tokens);
 
 void	set_env_node(t_env **env, char *key, char *val);
 t_env	*find_env_node(t_env *env_list, char *key);
@@ -112,7 +129,7 @@ void	ft_export(char **buf, t_env *env_list, char **splits, t_env *temp);
 void	ft_unset(char **buf, t_env **env_list);
 
 char	**get_env_list(t_env **env_list);
-
+char	*get_next_line(int fd);
 
 
 #endif
