@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/08 01:43:04 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/08 22:40:15 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ int		ft_lstsize(t_list *lst);
 void	env_lstadd_back(t_env **lst, char *key, char *value);
 void	env_lstadd_back_node(t_env **lst, t_env	*node);
 void	del_env_lst(t_env *lst);
+void	del_cmd_list(t_cmd *cmd);
 void	cmd_lstadd_back(t_cmd **lst, t_token *tokens);
 
 /* ENVIRONMENT SETTINGS */
@@ -116,7 +117,7 @@ char	**get_env_list(t_env **env_list);
 
 void	init_set(t_set *set, t_env **env);
 void	init_set2(t_set	*set, char ***envp, t_env *env);
-int		check_builtin_cmd(t_list *cmd);
+int		check_builtin_cmd(t_token *tokens);
 void	execute_builtin_cmd(t_proc *proc, char **exe);
 
 /* GET_NEXT_LINE */

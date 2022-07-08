@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:51:29 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/08 17:52:09 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/08 22:36:35 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,21 @@ void	cmd_lstadd_back(t_cmd **lst, t_token *tokens)
 	while (phead->next)
 		phead = phead->next;
 	phead->next = new;
+}
+
+void	del_cmd_list(t_cmd *cmd)
+{
+	t_cmd	*tmp;
+
+	tmp = cmd;
+	while (tmp)
+	{
+		tmp = cmd->next;
+		del_env_lst(cmd->tokens);
+		del_env_lst(cmd->redir);
+		free(cmd);
+		cmd = tmp;
+	}
 }
 
 void	del_env_lst(t_env *lst)

@@ -6,7 +6,7 @@
 #    By: seseo <seseo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/08 21:55:44 by seseo            ###   ########.fr        #
+#    Updated: 2022/07/08 22:01:38 by seseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,8 +51,8 @@ $(NAME)			:	$(LIB) $(OBJS) $(READLINE)
 					$(CC) $(CFLAGS) $(INCS) -L$(LIB_DIR) -l$(LIB_NAME) -L$(READLINE_DIR) -lreadline -lhistory -lncurses $(OBJS) -o $@
 
 $(READLINE)		:
-					cd $(READLINE_DIR); ./configure
-					$(MAKE) -C $(READLINE_DIR) all
+					@cd $(READLINE_DIR); ./configure
+					@$(MAKE) -C $(READLINE_DIR) all
 
 $(LIB)			:
 					$(MAKE) -C $(LIB_DIR) all
@@ -72,7 +72,7 @@ fclean			: 	clean
 					rm -rf $(LIB)
 					rm -rf $(NAME) $(OBJS_DIR)
 
-re 				:	fclean
+re 				:	#fclean
 					$(MAKE)
 
 .PHONY			: 	all clean fclean re

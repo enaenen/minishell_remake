@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:28:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/08 18:53:50 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/08 23:04:15 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -547,7 +547,7 @@ char	*replace_env_val(t_env *env, t_buffer *buf, char *data)
 }
 
 //malloc error
-char	*expand_data(t_proc *proc, char *data)
+char	*expand_data(t_env *env_list, char *data)
 {
 	t_buffer	*buf;
 	char		*str;
@@ -558,7 +558,7 @@ char	*expand_data(t_proc *proc, char *data)
 		if (is_quote(*data) == S_QUOTE)
 			data = skip_quote_2(buf, data, S_QUOTE);
 		else if (*data == '$')
-			data = replace_env_val(proc->env_list, buf, data);
+			data = replace_env_val(env_list, buf, data);
 		else
 			add_char(buf, *data);
 		if (data == NULL)
@@ -988,9 +988,10 @@ t_token	*parse_input(char *input, t_env *env)
 void	print_env_list(t_env *env)
 {
 	while (env){
-		printf("key = %s value = %s \n",env->key, env->value);
+		printf("key = %s ",env->key);
 		env = env->next;
 	}
+	printf("\n");
 }
 
 t_cmd	*make_cmd_list(t_env *env, t_token *tokens)
@@ -1040,7 +1041,7 @@ void	set_redir(t_cmd *cmd)
 		head = NULL;
 		while (cur)
 		{
-			if (cur && (ft_strncmp(cur->key, "<", 1) || ft_strncmp(cur->key, ">", 1)))
+			if (cur && (ft_strncmp(cur->key, "<", 1) == 0 || ft_strncmp(cur->key, ">", 1) == 0))
 			{
 				head = cur;
 				cur = head->next->next;
@@ -1053,9 +1054,68 @@ void	set_redir(t_cmd *cmd)
 			prev->next = NULL;
 			env_lstadd_back_node(&cmd_tmp->tokens, prev);
 		}
-		printf("asdfzxcv\n");
 		cmd_tmp = cmd_tmp->next;
 	}
+}
+
+int	fd_print_err(int fd)
+{
+	if (fd == -1)
+	{
+		error_msg(strerror(errno));
+		return (EXIT_FAILURE);
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	expand_here_doc(t_env *env, t_redir *redir)
+{
+	t_buffer	*buf;
+	char		*expanded_str;
+	int			io_heredoc[2];
+
+	if (pipe(io_heredoc))
+		exit(EXIT_FAILURE);
+	buf = create_buf();
+	expanded_str = expand_data(env, redir->value);
+	write(io_heredoc[1], expanded_str, ft_strlen(expanded_str));
+	close(io_heredoc[1]);
+	return (io_heredoc[0]);
+}
+
+int	apply_redir(t_env *env, t_cmd *cmd)
+{
+	int		fd;
+	t_redir	*redir;
+
+	redir = cmd->redir;
+	while (redir)
+	{
+		if(ft_strncmp(redir->key, "<", -1) == 0 || ft_strncmp(redir->key, "<<", -1) == 0)
+		{
+			if (ft_strncmp(redir->key, "<", -1) == 0)
+				fd = open(redir->next->key, O_RDONLY);
+			else
+				fd = expand_here_doc(env, redir);
+			if (fd_print_err(fd))
+				return (EXIT_FAILURE);
+			dup2(fd, STDIN_FILENO);
+			close(fd);
+		}
+		else
+		{
+			if (ft_strncmp(redir->key, ">", -1) == 0)
+				fd = open(redir->next->key, O_TRUNC | O_CREAT | O_WRONLY, 0777);
+			else
+				fd = open(redir->next->key, O_APPEND | O_CREAT | O_WRONLY, 0777);
+			if (fd_print_err(fd))
+				return (EXIT_FAILURE);
+			dup2(fd, STDOUT_FILENO);
+			close(fd);
+		}
+		redir = redir->next->next;
+	}
+	return (EXIT_SUCCESS);
 }
 
 void	print_cmd(t_cmd *cmd)
@@ -1068,12 +1128,112 @@ void	print_cmd(t_cmd *cmd)
 	}
 }
 
+void	backup_fd(int backup_io[2])
+{
+	backup_io[0] = dup(STDIN_FILENO);
+	backup_io[1] = dup(STDOUT_FILENO);
+}
+
+int	do_cmd(t_env *env, t_cmd *cmd)
+{
+	pid_t	pid;
+	int		status;
+
+	if (check_builtin_cmd(cmd->tokens))
+	{
+		status = do_builtin(env, cmd);
+		return (status);
+	}
+	else
+	{
+		pid = fork();
+		if (pid == -1)
+			exit(EXIT_FAILURE);
+		else if (pid == 0)
+			exit(do_cmd_child(env, cmd));
+		waitpid(-1, &status, 0);
+		if (WIFEXITED(status))
+			return (WEXITSTATUS(status));
+		return (WCOREFLAG | WTERMSIG(status));
+	}
+}
+
+int	do_pipe_cmd(t_env *env, t_cmd *cmd)
+{
+	
+}
+
+int	do_final_pipe_cmd(t_env *env, t_cmd *cmd, int n_pipe, int prev_fd)
+{
+	pid_t	pid;
+	int		status;
+	int		i;
+	
+	pid = fork();
+	if (pid == -1)
+	{
+		kill(0, KILLSIG);
+		exit(EXIT_FAILURE);
+	}
+	else if (pid == 0)
+	{
+		dup2(prev_fd, STDIN_FILENO);
+		close(prev_fd);
+		apply_redir(env, cmd);
+		exit(do_pipe_cmd());
+	}
+	close(prev_fd);
+	i = 0;
+	while (i < n_pipe + 1)
+	{
+		if (waitpid(-1, &status, 0) == pid)
+			g_status = status;
+		i++;
+	}
+	return (g_status);
+}
+
+int	do_pipe(t_env *env, t_cmd *cmd, int n_pipe)
+{
+	int		i;
+	pid_t	pid;
+	int		prev_fd;
+	int		pipe_fd[2];
+
+	prev_fd = -1;
+	i = 0;
+	while (i < n_pipe)
+	{
+		if (pipe(pipe_fd))
+		{
+			kill(0, KILLSIG);
+			exit(EXIT_FAILURE);
+		}
+		pid = fork();
+		if (pid == -1)
+		{
+			kill(0, KILLSIG);
+			exit(EXIT_FAILURE);
+		}
+		else if (pid == 0)
+		{
+			apply_redir(env, cmd);
+			exit(do_pipe_cmd());
+		}
+		if (prev_fd != -1)
+			close(prev_fd);
+		close(pipe_fd[1]);
+		prev_fd = pipe_fd[0];
+	}
+	return (do_final_pipe_cmd(env, cmd, n_pipe, prev_fd));
+}
+
 int	do_exec_function(t_env *env, t_token *tokens)
 {
 	t_cmd	*cmd;
 	t_cmd	*tmp;
 	int		n_cmd;
-	
+
 	cmd = make_cmd_list(env, tokens);
 	set_redir(cmd);
 	tmp = cmd;
@@ -1083,11 +1243,12 @@ int	do_exec_function(t_env *env, t_token *tokens)
 		n_cmd++;
 		tmp = tmp->next;
 	}
-	print_cmd(cmd);
-	return (1);
-	// if (n_cmd > 1)
-	// 	return (do_pipe);
-	// return (do_cmd);
+	if (n_cmd == 1)
+		g_status = do_cmd(env, cmd));
+	else
+		g_status = do_pipe(env, cmd, n_cmd);
+	del_cmd_list(cmd);
+	return (g_status);
 }
 
 int main(void)
