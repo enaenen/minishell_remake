@@ -1040,7 +1040,7 @@ void	set_redir(t_cmd *cmd)
 		head = NULL;
 		while (cur)
 		{
-			if (ft_strncmp(cur->key, "<", 1) || ft_strncmp(cur->key, ">", 1))
+			if (cur && (ft_strncmp(cur->key, "<", 1) || ft_strncmp(cur->key, ">", 1)))
 			{
 				head = cur;
 				cur = head->next->next;

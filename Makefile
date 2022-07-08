@@ -6,11 +6,6 @@
 #    By: seseo <seseo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-<<<<<<< HEAD
-#    Updated: 2022/07/08 18:41:33 by seseo            ###   ########.fr        #
-=======
-#    Updated: 2022/07/08 01:43:28 by wchae            ###   ########.fr        #
->>>>>>> 7a21d02c9164f3a04d2507999a909b95323f6fd5
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +16,7 @@ READLINE_LIB = $(READLINE_DIR)
 READLINE = $(READLINE_DIR)/libreadline.a
 
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra #-g -fsanitize=address,undefined
+CFLAGS		= -Wall -Werror -Wextra -g -fsanitize=address,undefined
 
 INCS		= -Ilibft -I.
 
@@ -29,7 +24,6 @@ SRCS_DIR		= srcs
 SRCS_NAME		= main.c\
 					sig_handler.c\
 					exe_handler.c\
-					heredoc_gnl.c\
 					heredoc.c\
 					lst_utils.c\
 					settings.c\
