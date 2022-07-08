@@ -1,28 +1,5 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/seseo/minishell'
-mkdir -p objs
-gcc -Wall -Werror -Wextra  -Ilibft -I.  -c srcs/exe_handler.c -o objs/exe_handler.o
- 
-mkdir -p objs
-gcc -Wall -Werror -Wextra  -Ilibft -I.  -c srcs/settings.c -o objs/settings.o
- 
-mkdir -p objs
-gcc -Wall -Werror -Wextra  -Ilibft -I.  -c srcs/builtin_echo.c -o objs/builtin_echo.o
-mkdir -p objs
-gcc -Wall -Werror -Wextra  -Ilibft -I.  -c srcs/builtin_pwd.c -o objs/builtin_pwd.o
-mkdir -p objs
-gcc -Wall -Werror -Wextra  -Ilibft -I.  -c srcs/builtin_exit.c -o objs/builtin_exit.o
-mkdir -p objs
-gcc -Wall -Werror -Wextra  -Ilibft -I.  -c srcs/builtin_cd.c -o objs/builtin_cd.o
-mkdir -p objs
-gcc -Wall -Werror -Wextra  -Ilibft -I.  -c srcs/builtin_env.c -o objs/builtin_env.o
-mkdir -p objs
-gcc -Wall -Werror -Wextra  -Ilibft -I.  -c srcs/builtin_export.c -o objs/builtin_export.o
- 
-mkdir -p objs
-gcc -Wall -Werror -Wextra  -Ilibft -I.  -c srcs/builtin_unset.c -o objs/builtin_unset.o
-mkdir -p objs
-gcc -Wall -Werror -Wextra  -Ilibft -I.  -c srcs/env_utils.c -o objs/env_utils.o
-gcc -Wall -Werror -Wextra  -Ilibft -I. -Llibft -lft -Lreadline -lreadline -lhistory -lncurses objs/main.o objs/sig_handler.o objs/exe_handler.o objs/heredoc_gnl.o objs/heredoc.o objs/lst_utils.o objs/settings.o objs/builtin_echo.o objs/builtin_pwd.o objs/builtin_exit.o objs/builtin_cd.o objs/builtin_env.o objs/builtin_export.o objs/builtin_unset.o objs/env_utils.o -o minishell
+make: `minishell' is up to date.
 make: Leaving directory `/Users/seseo/minishell'
  
