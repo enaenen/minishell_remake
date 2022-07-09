@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/09 19:11:08 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/09 19:56:30 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,7 @@ SRCS_NAME		=	main.c\
 					utils_env.c\
 					utils_lst.c\
 					utils_quote.c\
+					utils_quote2.c\
 					test_print.c
 
 SRCS			=	$(addprefix $(SRCS_DIR)/, $(SRCS_NAME))

@@ -6,9 +6,10 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:17:04 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 19:55:44 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -89,6 +90,7 @@ int		split_token(char *input, t_token **token);
 char	*expand_data(t_env *env_list, char *data);
 int		expand_here_doc(t_env *env, t_redir *redir);
 
+
 /** LIST UTILS **/
 t_list	*ft_lstlast(t_list *lst);
 void	ft_lstadd_back(t_list **lst, t_list *new);
@@ -98,6 +100,7 @@ int		ft_lstsize(t_list *lst);
 
 void	env_lstadd_back(t_env **lst, char *key, char *value);
 void	env_lstadd_back_node(t_env **lst, t_env	*node);
+t_env	*env_dup_check(t_env *env_list, char *new_key);
 void	del_env_lst(t_env *lst);
 void	del_cmd_list(t_cmd *cmd);
 void	cmd_lstadd_back(t_cmd **lst, t_token *tokens);
@@ -126,11 +129,11 @@ void	set_redir(t_cmd *cmd);
 
 
 /* EXECUTION */
-int	do_exec_function(t_env *env, t_token *tokens);
-int	do_pipe(t_env *env, t_cmd *cmd, int n_pipe);
-int	do_pipe_cmd(t_env *env, t_cmd *cmd);
-int	do_actual_path_cmd(t_cmd *cmd, char **args, char **envp);
-int	do_cmd_child(t_env *env, t_cmd *cmd);
+int		do_exec_function(t_env *env, t_token *tokens);
+int		do_pipe(t_env *env, t_cmd *cmd, int n_pipe);
+int		do_pipe_cmd(t_env *env, t_cmd *cmd);
+int		do_actual_path_cmd(t_cmd *cmd, char **args, char **envp);
+int		do_cmd_child(t_env *env, t_cmd *cmd);
 
 /* BUILTIN COMMANDS */
 int		ft_pwd(void);
@@ -150,7 +153,5 @@ int		is_quote(char c);
 char	*rm_quote(char *data);
 char	*skip_quote(t_buffer *buf, char *data, int q_flag);
 char	*skip_quote_2(t_buffer *buf, char *data, int q_flag);
-
-
-
+int		find_valid_quot_point(char *data, int start);
 #endif

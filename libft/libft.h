@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:21:44 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 17:55:41 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 19:50:15 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 # include <unistd.h>
 # include <stdlib.h>
 
-// GNL ASSETS
+/* GNL ASSETS */
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 32
 # endif
@@ -28,7 +28,7 @@
 # define SUCCESS 1
 # define END_OF_FILE 0
 # define ERROR -1
-// GNL ASSETS END
+
 
 typedef struct s_list
 {
