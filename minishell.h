@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 21:44:20 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 04:35:03 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,19 +60,7 @@ typedef struct s_set
 {
 	struct termios	org_term;
 	struct termios	new_term;
-	int				org_stdin;
-	int				org_stdout;
 }	t_set;
-
-typedef struct s_proc
-{
-	t_env	*env_list;
-	t_token	*tokens;
-	int		infile;
-	int		outfile;
-	int		pipe_flag;
-	int		status;
-}	t_proc;
 
 int		error_msg(char *msg);
 int		fd_print_err(int fd);
@@ -87,8 +75,10 @@ void	sig_readline(int sig);
 int		split_token(char *input, t_token **token);
 
 /* EXPAND*/
-char	*expand_data(t_env *env_list, char *data);
+char	*expand_str(t_env *env, char *str);
 int		expand_here_doc(t_env *env, t_redir *redir);
+char	**split_skip_quote(char *str);
+void	expand_tokens(t_env *env, t_token *tokens);
 
 
 /** LIST UTILS **/
@@ -118,6 +108,7 @@ void	init_set(t_set *set, t_env **env);
 void	init_set2(t_set	*set, char ***envp, t_env *env);
 int		check_builtin_cmd(t_token *tokens);
 int		execute_builtin_cmd(t_env *env_list, t_cmd *cmd, char **exe);
+int		execute_builtin_cmd_pipe(t_env *env_list, t_cmd *cmd, char **exe);
 
 /* COMMAND LIST */
 
@@ -139,9 +130,10 @@ int		do_cmd_child(t_env *env, t_cmd *cmd);
 int		ft_pwd(void);
 int		ft_echo(char **buf);
 int		ft_exit(char **buf);
+int		ft_exit_pipe(char **buf);
 int		ft_cd(char **buf, t_env *env_list);
 int		ft_env(t_env *env_list);
-int		ft_export(char **buf, t_env *env_list, char **splits, t_env *temp);
+int		ft_export(char **buf, t_env *env_list);
 int		ft_unset(char **buf, t_env **env_list);
 
 /* for TESTs */
@@ -155,4 +147,5 @@ char	*rm_quote(char *data);
 char	*skip_quote(t_buffer *buf, char *data, int q_flag);
 char	*skip_quote_2(t_buffer *buf, char *data, int q_flag);
 int		find_valid_quot_point(char *data, int start);
+void	rm_quote_tokens(t_token *tokens);
 #endif

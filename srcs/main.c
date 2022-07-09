@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:28:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:30:23 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 04:47:20 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,25 +40,21 @@ int	check_token(t_token	*token)
 	return (TRUE);
 }
 
-void	backup_fd(int backup_io[2])
-{
-	backup_io[0] = dup(STDIN_FILENO);
-	backup_io[1] = dup(STDOUT_FILENO);
-}
-
 t_token	*parse_input(char *input, t_env *env)
 {
 	t_token	*token;
+	int		status;
 
 	(void)env;
 	token = NULL;
 	add_history(input);
 	if (split_token(input, &token) == TRUE && check_token(token) == TRUE)
 	{
-		g_status = process_heredoc(token);
-		if (g_status)
+		status = process_heredoc(token);
+		if (status)
 		{
 			del_env_lst(token);
+			g_status = status;
 			return (NULL);
 		}
 	}
@@ -85,8 +81,8 @@ int	main(void)
 			tcsetattr(STDOUT_FILENO, TCSANOW, &set.org_term);
 			exit(g_status);
 		}
-		tcsetattr(STDOUT_FILENO, TCSANOW, &set.org_term);
 		tokens = parse_input(input, env);
+		tcsetattr(STDOUT_FILENO, TCSANOW, &set.org_term);
 		if (!tokens)
 		{
 			input = ft_free(input);

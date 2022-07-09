@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_execute.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:30:16 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 17:37:18 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 04:56:31 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	do_cmd_child(t_env *env, t_cmd *cmd)
 	char	**path;
 	int		i;
 
+	if (!cmd->tokens || !cmd->tokens->key)
+		return (EXIT_SUCCESS);
 	envp = get_env_list(&env);
 	args = tokens_to_strs(cmd->tokens);
 	if (ft_strchr(cmd->tokens->key, '/'))
@@ -58,31 +60,57 @@ int	do_cmd_child(t_env *env, t_cmd *cmd)
 	return (127);
 }
 
+void	backup_fd(int backup_io[2])
+{
+	backup_io[0] = dup(STDIN_FILENO);
+	backup_io[1] = dup(STDOUT_FILENO);
+}
+
+void	restore_fd(int backup_io[2])
+{
+	int	rd_io[2];
+
+	rd_io[0] = dup(STDIN_FILENO);
+	rd_io[1] = dup(STDOUT_FILENO);
+	dup2(backup_io[0], STDIN_FILENO);
+	dup2(backup_io[1], STDOUT_FILENO);
+	close(backup_io[0]);
+	close(backup_io[1]);
+	close(rd_io[0]);
+	close(rd_io[1]);
+}
+
 int	do_cmd(t_env *env, t_cmd *cmd)
 {
 	pid_t	pid;
 	char	**args;
 	int		status;
+	int		backup_io[2];
 
-	if (check_builtin_cmd(cmd->tokens))
+	expand_tokens(env, cmd->tokens);
+	rm_quote_tokens(cmd->tokens);
+	if (cmd->tokens && check_builtin_cmd(cmd->tokens))
 	{
+		backup_fd(backup_io);
+		apply_redir(env, cmd);
 		args = tokens_to_strs(cmd->tokens);
 		status = execute_builtin_cmd(env, cmd, args);
 		ft_free_split(args);
+		restore_fd(backup_io);
 		return (status);
 	}
-	else
+	pid = fork();
+	if (pid == -1)
+		exit(EXIT_FAILURE);
+	else if (pid == 0)
 	{
-		pid = fork();
-		if (pid == -1)
-			exit(EXIT_FAILURE);
-		else if (pid == 0)
-			exit(do_cmd_child(env, cmd));
-		waitpid(-1, &status, 0);
-		if (WIFEXITED(status))
-			return (WEXITSTATUS(status));
-		return (WCOREFLAG | WTERMSIG(status));
+		apply_redir(env, cmd);
+		exit(do_cmd_child(env, cmd));
 	}
+	waitpid(-1, &status, 0);
+	if (WIFEXITED(status))
+		return (WEXITSTATUS(status));
+	return (WCOREFLAG | WTERMSIG(status));
 }
 
 int	do_exec_function(t_env *env, t_token *tokens)
@@ -90,6 +118,7 @@ int	do_exec_function(t_env *env, t_token *tokens)
 	t_cmd	*cmd;
 	t_cmd	*tmp;
 	int		n_cmd;
+	int		status;
 
 	cmd = make_cmd_list(env, tokens);
 	set_redir(cmd);
@@ -101,9 +130,9 @@ int	do_exec_function(t_env *env, t_token *tokens)
 		tmp = tmp->next;
 	}
 	if (n_cmd == 1)
-		g_status = do_cmd(env, cmd);
+		status = do_cmd(env, cmd);
 	else
-		g_status = do_pipe(env, cmd, n_cmd - 1);
+		status = do_pipe(env, cmd, n_cmd - 1);
 	del_cmd_list(cmd);
-	return (g_status);
+	return (status);
 }

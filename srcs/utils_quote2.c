@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_quote2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 19:28:10 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:38:03 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 03:32:13 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,6 @@ int	find_valid_quot_point(char *data, int start)
 	if (data[find])
 		return (find);
 	return (start);
-}
-
-char	*skip_space(char *str)
-{
-	while (*str)
-	{
-		if (*str != ' ')
-			break ;
-		str++;
-	}
-	return (str);
 }
 
 char	**split_skip_quote(char *str)
@@ -51,13 +40,13 @@ char	**split_skip_quote(char *str)
 			add_char(buf, *str);
 		else
 		{
-			str = skip_space(str);
-			ft_lstadd_back(&tmp_lst, ft_lstnew(put_str(buf)));
-			if (*str == 0)
-				break ;
+			if (buf->len != 0)
+				ft_lstadd_back(&tmp_lst, ft_lstnew(put_str(buf)));
 		}
 		str++;
 	}
+	if (buf->len != 0)
+		ft_lstadd_back(&tmp_lst, ft_lstnew(put_str(buf)));
 	strs = lst_to_strs(tmp_lst);
 	ft_lstclear(&tmp_lst, free);
 	del_buf(buf);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   settings.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:53:43 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 16:44:05 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 04:21:06 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,8 @@ static void	env_init(t_env **env)
 
 void	init_set(t_set *set, t_env **env)
 {
-	ft_memset(set, 0, sizeof(t_set));
 	g_status = 0;
-	set->org_stdin = dup(STDIN_FILENO);
-	set->org_stdout = dup(STDOUT_FILENO);
+	ft_memset(set, 0, sizeof(t_set));
 	tcgetattr(STDIN_FILENO, &set->org_term);
 	tcgetattr(STDIN_FILENO, &set->new_term);
 	set->new_term.c_lflag &= ~(ECHOCTL);

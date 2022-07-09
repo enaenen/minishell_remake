@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:12:26 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 17:19:41 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 02:50:53 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	error_msg(char *msg)
 {
-	g_status = 2;
 	write(2, "bash: ", 6);
 	if (!msg)
 		write(2, "syntax error near unexpected token 'newline'", 44);
@@ -27,7 +26,6 @@ int	error_msg(char *msg)
 	}
 	else
 	{
-		g_status = 127;
 		write(2, msg, ft_strlen(msg));
 		if (ft_strncmp(strerror(errno), "Bad address", 12) == 0)
 			write(2, ": command not found", 19);
@@ -38,7 +36,7 @@ int	error_msg(char *msg)
 		}
 	}
 	write(2, "\n", 1);
-	return (g_status);
+	return (1);
 }
 
 int	fd_print_err(int fd)

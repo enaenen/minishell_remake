@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 02:25:03 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 22:31:36 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 02:46:04 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,5 @@ t_env	*find_env_node(t_env *env_list, char *key)
 			return (env_list);
 		env_list = env_list->next;
 	}
-	printf("key = %s\n",key);
 	return (NULL);
 }

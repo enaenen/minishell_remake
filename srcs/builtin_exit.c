@@ -3,31 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 18:43:07 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 16:50:18 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 04:18:37 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exit_extra_cases(int c, char *s)
+int	exit_extra_cases(int c, char *s)
 {
 	if (c == 1)
 	{
 		printf("exit\n");
-		write(2, "bash: exit ", 12);
+		write(2, "minishell: exit ", 17);
 		write(2, s, ft_strlen(s));
-		write(2, ": numeric argument, required\n", 28);
+		write(2, ": numeric argument required\n", 29);
 		exit(255);
 	}
 	else
 	{
 		printf("exit\n");
-		write(2, "bash: exit: too many arguments\n", 31);
-		g_status = 1;
+		write(2, "minishell: exit: too many arguments\n", 37);
 	}
+	return (EXIT_FAILURE);
 }
 
 int	valid_exit_arg(char *arg)
@@ -58,17 +58,27 @@ int	exit_num_arg_cal(char *arg)
 int	ft_exit(char **buf)
 {
 	if (!buf[0])
+	{
+		printf("exit\n");
 		exit(0);
+	}
 	if (!valid_exit_arg(buf[0]))
-		exit_extra_cases(1, buf[0]);
+		return (exit_extra_cases(1, buf[0]));
 	else if (!buf[1])
 	{
 		printf("exit\n");
 		exit(exit_num_arg_cal(buf[0]));
 	}
-	else
-	{
-		exit_extra_cases(2, NULL);
-	}
-	return (0);
+	return (exit_extra_cases(2, NULL));
+}
+
+int	ft_exit_pipe(char **buf)
+{
+	if (!buf[0])
+		exit(0);
+	if (!valid_exit_arg(buf[0]))
+		return (exit_extra_cases(1, buf[0]));
+	else if (!buf[1])
+		exit(exit_num_arg_cal(buf[0]));
+	return (exit_extra_cases(2, NULL));
 }

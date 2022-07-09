@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:51:29 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:25:43 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 01:49:23 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ char	**lst_to_strs(t_list *lst)
 	i = 0;
 	while (lst)
 	{
-		strs[i++] = lst->data;
+		strs[i++] = ft_strdup(lst->data);
 		lst = lst->next;
 	}
 	return (strs);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 18:20:56 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:48:38 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 00:18:15 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static int	digit_count(int n)
 	int	count;
 
 	count = 1;
+	n /= 10;
 	while (n)
 	{
 		n /= 10;
@@ -45,10 +46,11 @@ char	*ft_itoa(int n)
 		res[0] = '-';
 	}
 	res[--size] = (num % 10) + '0';
+	num /= 10;
 	while (num)
 	{
-		num /= 10;
 		res[--size] = (num % 10) + '0';
+		num /= 10;
 	}
 	return (res);
 }

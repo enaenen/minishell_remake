@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
+#    By: seseo <seseo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/09 21:47:56 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/10 03:29:02 by seseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ all				:	$(NAME)
 
 clean			:
 					$(MAKE) -C $(LIB_DIR) clean
-					$(MAKE) -C $(READLINE_DIR) clean
+# $(MAKE) -C $(READLINE_DIR) clean
 					rm -rf $(OBJS_DIR)
 
 fclean			: 	clean

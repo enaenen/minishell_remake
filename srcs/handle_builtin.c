@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_builtin.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 00:05:09 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 16:54:02 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 04:19:10 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,29 @@ int	execute_builtin_cmd(t_env *env_list, t_cmd *cmd, char **exe)
 	else if (ft_strncmp(cmd->tokens->key, "pwd", 4) == 0)
 		return (ft_pwd());
 	else if (ft_strncmp(cmd->tokens->key, "export", 7) == 0)
-		return (ft_export(&exe[1], env_list, 0, 0));
+		return (ft_export(&exe[1], env_list));
 	else if (ft_strncmp(cmd->tokens->key, "unset", 6) == 0)
 		return (ft_unset(&exe[1], &env_list));
 	else if (ft_strncmp(cmd->tokens->key, "env", 4) == 0)
 		return (ft_env(env_list));
 	else
 		return (ft_exit(&exe[1]));
+}
+
+int	execute_builtin_cmd_pipe(t_env *env_list, t_cmd *cmd, char **exe)
+{
+	if (ft_strncmp(cmd->tokens->key, "echo", 5) == 0)
+		return (ft_echo(&exe[1]));
+	else if (ft_strncmp(cmd->tokens->key, "cd", 3) == 0)
+		return (ft_cd(&exe[1], env_list));
+	else if (ft_strncmp(cmd->tokens->key, "pwd", 4) == 0)
+		return (ft_pwd());
+	else if (ft_strncmp(cmd->tokens->key, "export", 7) == 0)
+		return (ft_export(&exe[1], env_list));
+	else if (ft_strncmp(cmd->tokens->key, "unset", 6) == 0)
+		return (ft_unset(&exe[1], &env_list));
+	else if (ft_strncmp(cmd->tokens->key, "env", 4) == 0)
+		return (ft_env(env_list));
+	else
+		return (ft_exit_pipe(&exe[1]));
 }

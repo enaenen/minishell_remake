@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   heredoc.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:19:21 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:31:03 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 05:02:54 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	heredoc_child(char *limiter, int *fd)
 	buf = create_buf();
 	while (TRUE)
 	{
-		line = readline(">");
+		line = readline("> ");
 		if (!line)
 			break ;
 		if (ft_strncmp(line, limiter, -1) == 0)
@@ -35,8 +35,9 @@ static void	heredoc_child(char *limiter, int *fd)
 		free(line);
 	}
 	line = put_str(buf);
-	del_buf(buf);
 	write(fd[1], line, ft_strlen(line));
+	close(fd[1]);
+	del_buf(buf);
 	exit(EXIT_SUCCESS);
 }
 

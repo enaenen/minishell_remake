@@ -3,29 +3,47 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_echo.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 00:11:28 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:20:09 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 04:38:43 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+int	is_option(char *str)
+{
+	if (str == NULL)
+		return (FALSE);
+	if (*str == '-')
+	{
+		str++;
+		while (*str == 'n')
+			str++;
+	}
+	if (*str == 0)
+		return (TRUE);
+	return (FALSE);
+}
+
 int	ft_echo(char **buf)
 {
 	int	i;
+	int	option_flag;
 
 	i = 0;
-	while (buf[i] != NULL && !ft_strcmp(buf[i], "-n"))
-		i++;
-	while (buf[i])
+	option_flag = is_option(*buf);
+	while (is_option(*buf))
+		buf++;
+	while (*buf)
 	{
-		printf("%s", buf[i]);
-		if (buf[i++ + 1] != 0)
+		printf("%s", *buf);
+		if (*(buf + 1))
 			printf(" ");
+		buf++;
 	}
-	if ((i == 0) || (0 < i && ft_strcmp(buf[0], "-n") != 0))
+	if (!option_flag)
 		printf("\n");
 	return (0);
 }

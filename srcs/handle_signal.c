@@ -3,22 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_signal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 15:13:14 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 16:47:41 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 03:02:11 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	ft_replace_line(int var_stat)
-{
-	rl_replace_line("", 0);
-	rl_on_new_line();
-	rl_redisplay();
-	g_status = var_stat;
-}
 
 void	sig_readline(int sig)
 {
@@ -41,7 +33,7 @@ void	sig_here_doc(int sig)
 void	sig_exec(int sig)
 {
 	if (sig == SIGINT)
-		printf("^C\n");
+		printf("\n");
 	else if (sig == SIGQUIT)
 		printf("Quit: 3\n");
 }

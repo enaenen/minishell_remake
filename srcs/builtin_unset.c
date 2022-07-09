@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 16:49:19 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 16:49:19 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 02:51:11 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	unset_key_syntax_check(char *s)
 		write(2, "bash: unset: `", 14);
 		write(2, s, ft_strlen(s));
 		write(2, "': not a valid identifier\n", 27);
-		g_status = 1;
 		return (0);
 	}
 	while (s[++i])
@@ -34,7 +33,6 @@ int	unset_key_syntax_check(char *s)
 			write(2, "bash: unset: `", 14);
 			write(2, s, ft_strlen(s));
 			write(2, "': not a valid identifier\n", 27);
-			g_status = 1;
 			return (0);
 		}
 	}

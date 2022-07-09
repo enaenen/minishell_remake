@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   handle_redirect.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:31:12 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 17:31:52 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 04:42:06 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	set_redir(t_cmd *cmd)
 {
