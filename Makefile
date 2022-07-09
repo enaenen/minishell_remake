@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/09 19:56:30 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/09 21:47:56 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ READLINE_LIB	=	$(READLINE_DIR)
 READLINE		=	$(READLINE_DIR)/libreadline.a
 
 CC				=	gcc
-CFLAGS			=	-Wall -Werror -Wextra -g #-fsanitize=address
+CFLAGS			=	-Wall -Werror -Wextra -g -fsanitize=address
 
 INCS			=	-Ilibft -I.
 
