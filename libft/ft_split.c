@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/12 14:05:43 by wchae             #+#    #+#             */
-/*   Updated: 2022/06/12 18:14:49 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 19:46:32 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,9 +49,9 @@ static int	ft_str_wdcnt(char const *s, char c)
 
 static char	**ft_alloc_chr(char **ret, char const *s, char c)
 {
-	int i;
-	int j;
-	int cnt;
+	int	i;
+	int	j;
+	int	cnt;
 
 	i = 0;
 	j = -1;
@@ -105,8 +105,8 @@ static void	ft_strcpy(char **dest, char const *src, char c)
 
 char	**ft_split(char const *str, char c)
 {
-	char **ret;
-	int	word_cnt;
+	char	**ret;
+	int		word_cnt;
 
 	if (!str)
 		return (NULL);

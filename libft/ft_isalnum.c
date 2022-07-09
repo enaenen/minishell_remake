@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/24 17:37:10 by wchae             #+#    #+#             */
-/*   Updated: 2022/06/27 21:45:58 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 19:49:02 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	ft_isalnum(int c)
 {
-	return (ft_isdigit(c)|| ft_isalpha(c));
+	return (ft_isdigit(c) || ft_isalpha(c));
 }
