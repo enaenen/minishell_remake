@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 18:43:07 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 15:40:12 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/09 16:50:18 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 void	exit_extra_cases(int c, char *s)
 {
 	if (c == 1)
 	{
 		printf("exit\n");
-		write(2,"bash: exit ", 12);
+		write(2, "bash: exit ", 12);
 		write(2, s, ft_strlen(s));
 		write(2, ": numeric argument, required\n", 28);
 		exit(255);
@@ -30,10 +30,10 @@ void	exit_extra_cases(int c, char *s)
 	}
 }
 
-int valid_exit_arg(char *arg)
+int	valid_exit_arg(char *arg)
 {
-	int i;
-	
+	int	i;
+
 	i = 0;
 	if (18 < ft_strlen(arg))
 		return (0);

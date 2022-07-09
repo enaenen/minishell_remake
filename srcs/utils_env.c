@@ -1,16 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils.c                                        :+:      :+:    :+:   */
+/*   utils_env.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 02:25:03 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 15:56:16 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/09 19:25:48 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
+
+t_env	*env_dup_check(t_env *env_list, char *new_key)
+{
+	t_env	*temp;
+
+	temp = env_list;
+	while (temp)
+	{
+		if (!ft_strcmp(temp->key, new_key))
+			return (temp);
+		temp = temp->next;
+	}
+	return (NULL);
+}
 
 static void	get_env_convert(t_env **env_list, char **env)
 {
@@ -35,7 +49,7 @@ static void	get_env_convert(t_env **env_list, char **env)
 	del_buf(buf);
 }
 
-char **get_env_list(t_env **env_list)
+char	**get_env_list(t_env **env_list)
 {
 	t_env	*tmp;
 	char	**env;
@@ -55,4 +69,26 @@ char **get_env_list(t_env **env_list)
 	env[i] = NULL;
 	get_env_convert(env_list, env);
 	return (env);
+}
+
+char	*read_key(t_env *env_list, char *key)
+{
+	while (env_list)
+	{
+		if (!ft_strcmp(env_list->key, key))
+			return (ft_strdup(env_list->value));
+		env_list = env_list->next;
+	}
+	return (NULL);
+}
+
+t_env	*find_env_node(t_env *env_list, char *key)
+{
+	while (env_list)
+	{
+		if (ft_strncmp(env_list->key, key, -1) == 0)
+			return (env_list);
+		env_list = env_list->next;
+	}
+	return (NULL);
 }

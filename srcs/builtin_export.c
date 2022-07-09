@@ -3,27 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 18:43:23 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 15:50:37 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/09 19:36:12 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-t_env	*env_dup_check(t_env *env_list, char *new_key)
+char	*replace_env_val(t_env *env, t_buffer *buf, char *data)
 {
-	t_env	*temp;
+	char	*key;
+	char	*str;
+	int		i;
 
-	temp = env_list;
-	while (temp)
+	i = 1;
+	if (*(data + 1) == '?')
+		str = ft_itoa(g_status);
+	else if (*(data + 1) == 0)
+		str = ft_strdup("$");
+	else if (ft_isdigit(*(data + 1)))
+		str = NULL;
+	else
 	{
-		if (!ft_strcmp(temp->key, new_key))
-			return (temp);
-		temp = temp->next;
+		while (data[i] && (ft_isalnum(data[i]) || data[i] == '_'))
+			i++;
+		if (i == 1)
+			str = ft_substr(data, 0, 2);
+		else
+		{
+			key = ft_substr(data, 1, i);
+			str = read_key(env, key);
+			free(key);
+		}
 	}
-	return (NULL);
+	add_str(buf, str);
+	free(str);
+	return (data);
 }
 
 int	export_key_syntax_error(char *s)
@@ -85,7 +102,9 @@ int	print_export(t_env *env_list)
 	sort_env(env);
 	while (*env)
 	{
-		printf("declare -x %s=\"%s\"\n", *env, find_env_node(env_list, *env)->value);
+		printf("declare -x %s=\"%s\"\n",
+			*env,
+			find_env_node(env_list, *env)->value);
 		env++;
 	}
 	ft_free_split(env);

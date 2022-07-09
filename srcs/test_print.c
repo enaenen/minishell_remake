@@ -1,23 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   test_print.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/28 00:14:31 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 16:49:31 by wchae            ###   ########.fr       */
+/*   Created: 2022/07/09 16:29:16 by wchae             #+#    #+#             */
+/*   Updated: 2022/07/09 17:04:16 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_pwd(void)
+void	ft_lstprint(t_list *lst)
 {
-	char	*buf;
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		ft_putstr(lst->data);
+		ft_putstr("\n");
+		lst = lst->next;
+	}
+}
 
-	buf = getcwd(NULL, 0);
-	printf("%s\n", buf);
-	free (buf);
-	return (0);
+void	print_env_list(t_env *env)
+{
+	while (env)
+	{
+		printf("key = %s ",env->key);
+		env = env->next;
+	}
+	printf("\n");
+}
+
+void	print_cmd(t_cmd *cmd)
+{
+	while (cmd)
+	{
+		print_env_list(cmd->tokens);
+		print_env_list(cmd->redir);
+		cmd = cmd->next;
+	}
 }

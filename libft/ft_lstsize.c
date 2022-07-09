@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/28 00:14:31 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 16:49:31 by wchae            ###   ########.fr       */
+/*   Created: 2022/07/09 17:07:31 by wchae             #+#    #+#             */
+/*   Updated: 2022/07/09 17:07:45 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+int	ft_lstsize(t_list *lst)
 {
-	char	*buf;
+	int	i;
 
-	buf = getcwd(NULL, 0);
-	printf("%s\n", buf);
-	free (buf);
-	return (0);
+	i = 0;
+	while (lst)
+	{
+		lst = lst->next;
+		i++;
+	}
+	return (i);
 }
