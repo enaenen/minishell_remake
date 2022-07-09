@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 16:53:56 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:14:22 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 19:22:55 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	del_cmd_list(t_cmd *cmd)
 		cmd = tmp;
 	}
 }
-
+// TODO : expand_env $
 t_cmd	*make_cmd_list(t_env *env, t_token *tokens)
 {
 	t_cmd	*cmd;
