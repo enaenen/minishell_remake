@@ -6,23 +6,11 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:15:54 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:17:43 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 19:38:26 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	find_valid_quot_point(char *data, int start)
-{
-	int find;
-
-	find = start + 1;
-	while (data[find] && data[start] != data[find])
-		find++;
-	if (data[find])
-		return (find);
-	return (start);
-}
 /**
  *
  * 쪼개는 작업
@@ -76,7 +64,7 @@ int	split_space_token(char *input, int i, t_token **token)
  * 	"echo abc" AND "|"" AND "ls -l"
  **/
 
-int		split_pipe_token(char *input, int i, t_token **token)
+int	split_pipe_token(char *input, int i, t_token **token)
 {
 	char	*tmp;
 

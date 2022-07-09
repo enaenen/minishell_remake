@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:51:29 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 17:13:10 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 19:25:43 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,6 @@ char	**tokens_to_strs(t_token *tokens)
 	}
 	return (strs);
 }
-
 
 void	del_env_lst(t_env *lst)
 {

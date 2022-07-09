@@ -6,41 +6,24 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 02:25:03 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:15:38 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 19:25:48 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*replace_env_val(t_env *env, t_buffer *buf, char *data)
+t_env	*env_dup_check(t_env *env_list, char *new_key)
 {
-	char	*key;
-	char	*str;
-	int		i;
+	t_env	*temp;
 
-	i = 1;
-	if (*(data + 1) == '?')
-		str = ft_itoa(g_status);
-	else if (*(data + 1) == 0)
-		str = ft_strdup("$");
-	else if (ft_isdigit(*(data + 1)))
-		str = NULL;
-	else
+	temp = env_list;
+	while (temp)
 	{
-		while (data[i] && (ft_isalnum(data[i]) || data[i] == '_'))
-			i++;
-		if (i == 1)
-			str = ft_substr(data, 0, 2);
-		else
-		{
-			key = ft_substr(data, 1, i);
-			str = read_key(env, key);
-			free(key);
-		}
+		if (!ft_strcmp(temp->key, new_key))
+			return (temp);
+		temp = temp->next;
 	}
-	add_str(buf, str);
-	free(str);
-	return (data);
+	return (NULL);
 }
 
 static void	get_env_convert(t_env **env_list, char **env)
