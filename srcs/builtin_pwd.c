@@ -3,21 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_pwd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 00:14:31 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/06 21:08:05 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 16:19:14 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-void	ft_pwd(void)
+int	ft_pwd(void)
 {
-	char *buf;
+	char	*buf;
 
 	buf = getcwd(NULL, 0);
-	printf("%s\n", 	buf);
+	printf("%s\n", buf);
 	free (buf);
-	g_status = 0;
+	return (0);
 }

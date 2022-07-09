@@ -1,3 +1,31 @@
 {
-    "makefile.extensionOutputFolder": "./.vscode"
+	"editor.tabSize": 4,
+	"editor.insertSpaces": false,
+	"editor.detectIndentation": false,
+	"editor.renderWhitespace": "all",
+	"files.trimTrailingWhitespace": true,
+	"files.insertFinalNewline": true,
+
+	"explorer.sortOrder": "type",
+
+	"C_Cpp.errorSquiggles": "Disabled",
+	"files.associations": {
+		"ctype.h": "c",
+		"libft.h": "c",
+		"ft_printf.h": "c",
+		"get_next_line_struct.h": "c",
+		"stdlib.h": "c",
+		"array": "c",
+		"string": "c",
+		"string_view": "c",
+		"vector": "c",
+		"push_swap.h": "c",
+		"linked_deque.h": "c",
+		"pipex.h": "c",
+		"get_next_line_bonus.h": "c",
+		"locale": "c",
+		"philo.h": "c",
+		"philo_bonus.h": "c",
+		"random": "c"
+	},
 }

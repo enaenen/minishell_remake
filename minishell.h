@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/08 22:40:15 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/09 15:35:03 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <signal.h>
 # include <dirent.h>
 # include <curses.h>
+# include <errno.h>
 # include "libft.h"
 
 # define ERROR -1
@@ -109,6 +110,7 @@ void	env_lstadd_back_node(t_env **lst, t_env	*node);
 void	del_env_lst(t_env *lst);
 void	del_cmd_list(t_cmd *cmd);
 void	cmd_lstadd_back(t_cmd **lst, t_token *tokens);
+char	**tokens_to_strs(t_token *tokens);
 
 /* ENVIRONMENT SETTINGS */
 void	set_env_node(t_env **env, char *key, char *val);
@@ -118,20 +120,20 @@ char	**get_env_list(t_env **env_list);
 void	init_set(t_set *set, t_env **env);
 void	init_set2(t_set	*set, char ***envp, t_env *env);
 int		check_builtin_cmd(t_token *tokens);
-void	execute_builtin_cmd(t_proc *proc, char **exe);
+int		execute_builtin_cmd(t_env *env_list, t_cmd *cmd, char **exe);
 
 /* GET_NEXT_LINE */
 char	*get_next_line(int fd);
 
 /* BUILTIN COMMANDS */
-void	ft_pwd(void);
+int		ft_pwd(void);
 int		ft_echo(char **buf);
-void	ft_exit(char **buf);
-void	ft_cd(char **buf, t_env *env_list);
+int		ft_exit(char **buf);
+int		ft_cd(char **buf, t_env *env_list);
 int		ft_env(t_env *env_list);
 int		ft_cd2(t_proc *proc, char **cmd);
-void	ft_export(char **buf, t_env *env_list, char **splits, t_env *temp);
-void	ft_unset(char **buf, t_env **env_list);
+int		ft_export(char **buf, t_env *env_list, char **splits, t_env *temp);
+int		ft_unset(char **buf, t_env **env_list);
 
 char	*get_next_line(int fd);
 

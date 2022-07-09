@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 20:05:39 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/04 15:41:28 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 15:36:44 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,19 @@ static void	cd_error(int error, char *arg)
 
 
 
-void	ft_cd(char **buf, t_env *env_list)
+int	ft_cd(char **buf, t_env *env_list)
 {
 	int		tmp;
 	int		error;
 	char	*pwd;
 	char	*old_pwd;
-	
+
 	old_pwd = getcwd(NULL, 0);
 	if (!buf[0])
 	{
 		chdir(read_key(env_list, "HOME"));
 		g_status = 0;
-		return ;
+		return (EXIT_SUCCESS);
 	}
 	tmp = chdir(buf[0]);
 	if (tmp < 0)
@@ -58,7 +58,7 @@ void	ft_cd(char **buf, t_env *env_list)
 		error = errno;
 		cd_error(error, buf[0]);
 		g_status = error;
-		return ;
+		return (EXIT_FAILURE);
 	}
 	pwd = getcwd(NULL, 0);
 	if(pwd && old_pwd)
@@ -68,7 +68,7 @@ void	ft_cd(char **buf, t_env *env_list)
 		if (find_env_node(env_list, "OLDPWD"))
 			set_env_node(&env_list, ft_strdup("OLDPWD"), old_pwd);
 	}
-	g_status = 0;
+	return (EXIT_SUCCESS);
 }
 
 /*

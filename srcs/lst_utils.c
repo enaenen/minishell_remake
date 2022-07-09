@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:51:29 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/08 22:36:35 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/09 15:12:05 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,32 @@ void	cmd_lstadd_back(t_cmd **lst, t_token *tokens)
 	while (phead->next)
 		phead = phead->next;
 	phead->next = new;
+}
+
+char	**tokens_to_strs(t_token *tokens)
+{
+	t_token	*tmp;
+	char	**strs;
+	int		i;
+
+	i = 0;
+	tmp = tokens;
+	while (tmp)
+	{
+		tmp = tmp->next;
+		i++;
+	}
+	strs = malloc(sizeof(char *) * (i + 1));
+	if (strs == NULL)
+		exit(EXIT_FAILURE);
+	strs[i] = NULL;
+	i = 0;
+	while (tokens)
+	{
+		strs[i++] = ft_strdup(tokens->key);
+		tokens = tokens->next;
+	}
+	return (strs);
 }
 
 void	del_cmd_list(t_cmd *cmd)

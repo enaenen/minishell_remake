@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:28:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/08 23:04:15 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/09 16:17:43 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -1134,14 +1134,62 @@ void	backup_fd(int backup_io[2])
 	backup_io[1] = dup(STDOUT_FILENO);
 }
 
+int	do_actual_path_cmd(t_cmd *cmd, char **args, char **envp)
+{
+	execve(cmd->tokens->key, args, envp);
+	error_msg(strerror(errno));
+	return (127);
+}
+
+int	do_cmd_child(t_env *env, t_cmd *cmd)
+{
+	char	**envp;
+	char	**args;
+	char	**path;
+	int		i;
+
+	envp = get_env_list(&env);
+	args = tokens_to_strs(cmd->tokens);
+	if (ft_strchr(cmd->tokens->key, '/'))
+		return (do_actual_path_cmd(cmd, args, envp));
+	if (find_env_node(env, "PATH"))
+	{
+		path = ft_split(find_env_node(env, "PATH")->value, ':');
+		i = 0;
+		while (path[i])
+		{
+			path[i] = ft_strjoin(path[i], "/");
+			path[i] = ft_strjoin(path[i], args[0]);
+			i++;
+		}
+		while (*path)
+		{
+			execve(*path, args, envp);
+			if (errno != ENOENT)
+				break ;
+			path++;
+		}
+		if (errno != ENOENT)
+		{
+			error_msg(strerror(errno));
+			return (126);
+		}
+	}
+	error_msg("command not found");
+	return (127);
+}
+
 int	do_cmd(t_env *env, t_cmd *cmd)
 {
 	pid_t	pid;
+	char	**args;
 	int		status;
 
 	if (check_builtin_cmd(cmd->tokens))
 	{
-		status = do_builtin(env, cmd);
+		args = tokens_to_strs(cmd->tokens);
+		status = execute_builtin_cmd(env, cmd, args);
+		ft_free_split(args);
 		return (status);
 	}
 	else
@@ -1160,7 +1208,12 @@ int	do_cmd(t_env *env, t_cmd *cmd)
 
 int	do_pipe_cmd(t_env *env, t_cmd *cmd)
 {
-	
+
+	if (check_builtin_cmd(cmd->tokens))
+		return (execute_builtin_cmd(env, cmd, tokens_to_strs(cmd->tokens)));
+	if (ft_strchr(cmd->tokens->key, '/'))
+		return (do_actual_path_cmd(cmd, tokens_to_strs(cmd->tokens), get_env_list(&env)));
+	return (do_cmd_child(env, cmd));
 }
 
 int	do_final_pipe_cmd(t_env *env, t_cmd *cmd, int n_pipe, int prev_fd)
@@ -1168,11 +1221,11 @@ int	do_final_pipe_cmd(t_env *env, t_cmd *cmd, int n_pipe, int prev_fd)
 	pid_t	pid;
 	int		status;
 	int		i;
-	
+
 	pid = fork();
 	if (pid == -1)
 	{
-		kill(0, KILLSIG);
+		kill(0, SIGKILL);
 		exit(EXIT_FAILURE);
 	}
 	else if (pid == 0)
@@ -1180,7 +1233,7 @@ int	do_final_pipe_cmd(t_env *env, t_cmd *cmd, int n_pipe, int prev_fd)
 		dup2(prev_fd, STDIN_FILENO);
 		close(prev_fd);
 		apply_redir(env, cmd);
-		exit(do_pipe_cmd());
+		exit(do_pipe_cmd(env, cmd));
 	}
 	close(prev_fd);
 	i = 0;
@@ -1206,24 +1259,34 @@ int	do_pipe(t_env *env, t_cmd *cmd, int n_pipe)
 	{
 		if (pipe(pipe_fd))
 		{
-			kill(0, KILLSIG);
+			kill(0, SIGKILL);
 			exit(EXIT_FAILURE);
 		}
 		pid = fork();
 		if (pid == -1)
 		{
-			kill(0, KILLSIG);
+			kill(0, SIGKILL);
 			exit(EXIT_FAILURE);
 		}
 		else if (pid == 0)
 		{
+			if (prev_fd != -1)
+			{
+				dup2(prev_fd, STDIN_FILENO);
+				close(prev_fd);
+			}
+			close(pipe_fd[0]);
+			dup2(pipe_fd[1], STDOUT_FILENO);
+			close(pipe_fd[1]);
 			apply_redir(env, cmd);
-			exit(do_pipe_cmd());
+			exit(do_pipe_cmd(env, cmd));
 		}
 		if (prev_fd != -1)
 			close(prev_fd);
 		close(pipe_fd[1]);
 		prev_fd = pipe_fd[0];
+		cmd = cmd->next;
+		i++;
 	}
 	return (do_final_pipe_cmd(env, cmd, n_pipe, prev_fd));
 }
@@ -1244,9 +1307,9 @@ int	do_exec_function(t_env *env, t_token *tokens)
 		tmp = tmp->next;
 	}
 	if (n_cmd == 1)
-		g_status = do_cmd(env, cmd));
+		g_status = do_cmd(env, cmd);
 	else
-		g_status = do_pipe(env, cmd, n_cmd);
+		g_status = do_pipe(env, cmd, n_cmd - 1);
 	del_cmd_list(cmd);
 	return (g_status);
 }
@@ -1279,7 +1342,6 @@ int main(void)
 			continue ;
 		}
 		g_status = do_exec_function(env, tokens);
-		printf("asdf\n");
 		input = ft_free(input);
 	}
 	return (0);

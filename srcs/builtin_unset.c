@@ -29,7 +29,7 @@ int	unset_key_syntax_check(char *s)
 	return (1);
 }
 
-void	ft_unset(char **buf, t_env **env_list)
+int	ft_unset(char **buf, t_env **env_list)
 {
 	int		i;
 	t_env	**p_env;
@@ -55,5 +55,5 @@ void	ft_unset(char **buf, t_env **env_list)
 				p_env = &(*p_env)->next;
 		}
 	}
-	g_status = 0;
+	return (0);
 }

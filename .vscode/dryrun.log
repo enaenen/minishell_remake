@@ -1,6 +1,11 @@
 make --dry-run --keep-going --print-directory
 make: Entering directory `/Users/seseo/minishell'
-make: `minishell' is up to date.
+mkdir -p objs
+gcc -Wall -Werror -Wextra -g  -Ilibft -I.  -c srcs/builtin_pwd.c -o objs/builtin_pwd.o
  
+mkdir -p objs
+gcc -Wall -Werror -Wextra -g  -Ilibft -I.  -c srcs/builtin_unset.c -o objs/builtin_unset.o
+ 
+gcc -Wall -Werror -Wextra -g  -Ilibft -I. -Llibft -lft -Lreadline -lreadline -lhistory -lncurses objs/main.o objs/sig_handler.o objs/exe_handler.o objs/heredoc.o objs/lst_utils.o objs/settings.o objs/gnl.o objs/builtin_echo.o objs/builtin_pwd.o objs/builtin_exit.o objs/builtin_cd.o objs/builtin_env.o objs/builtin_export.o objs/builtin_unset.o objs/env_utils.o -o minishell
 make: Leaving directory `/Users/seseo/minishell'
  

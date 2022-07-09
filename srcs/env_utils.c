@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 02:25:03 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/06 22:16:13 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 15:56:16 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ char **get_env_list(t_env **env_list)
 	env = malloc(sizeof(char *) * (i + 1));
 	if (env == NULL)
 		exit(1);
+	env[i] = NULL;
 	get_env_convert(env_list, env);
 	return (env);
 }

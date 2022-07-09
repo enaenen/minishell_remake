@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 18:43:07 by wchae             #+#    #+#             */
-/*   Updated: 2022/06/28 19:56:16 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 15:40:12 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,21 +44,18 @@ int valid_exit_arg(char *arg)
 		if (!ft_isdigit(arg[i++]))
 			return (0);
 	}
-	return (1);		
+	return (1);
 }
 
-int		exit_num_arg_cal(char *arg)
+int	exit_num_arg_cal(char *arg)
 {
 	int	ret;
 
 	ret = ft_atoi(arg);
-	if (0 <= ret && ret < 255)
-		return (ret);
-	else
-		return (255);
+	return (ret);
 }
 
-void	ft_exit(char **buf)
+int	ft_exit(char **buf)
 {
 	if (!buf[0])
 		exit(0);
@@ -72,6 +69,6 @@ void	ft_exit(char **buf)
 	else
 	{
 		exit_extra_cases(2, NULL);
-		return ;
 	}
+	return (0);
 }
