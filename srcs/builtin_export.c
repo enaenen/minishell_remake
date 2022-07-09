@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 18:43:23 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:36:12 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 23:00:47 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	export_key_syntax_check(char *s)
 	g_status = 0;
 	return (1);
 }
-
+/*
 void	sort_env(char **env)
 {
 	char	*tmp;
@@ -93,21 +93,42 @@ void	sort_env(char **env)
 		i++;
 	}
 }
+*/
+void	sort_env(t_env **env_list)
+{
+	t_env	*next;
+	t_env	*cur;
+	t_env	swap_tmp;
+
+	cur = *env_list;
+	while (cur)
+	{
+		next = cur->next;
+		while (next)
+		{
+			if (0 < ft_strncmp(cur->key, next->key, -1))
+			{
+				swap_tmp.key = cur->key;
+				swap_tmp.value = cur->value;
+				cur->key = next->key;
+				cur->value = next->value;
+				next->key = swap_tmp.key;
+				next->value = swap_tmp.value;
+			}
+			next = next->next;
+		}
+		cur = cur->next;
+	}
+}
 
 int	print_export(t_env *env_list)
 {
-	char	**env;
-
-	env = get_env_list(&env_list);
-	sort_env(env);
-	while (*env)
+	sort_env(&env_list);
+	while (env_list) //&& env_list->value)
 	{
-		printf("declare -x %s=\"%s\"\n",
-			*env,
-			find_env_node(env_list, *env)->value);
-		env++;
+		printf("declare -x %s=\"%s\"\n", env_list->key, env_list->value);
+		env_list = env_list->next;
 	}
-	ft_free_split(env);
 	return (0);
 }
 
@@ -115,7 +136,6 @@ int	ft_export(char **buf, t_env *env_list, char **splits, t_env *tmp)
 {
 	if (!buf[0])
 	{
-		g_status = 0;
 		return (print_export(env_list));
 	}
 	while (*buf)

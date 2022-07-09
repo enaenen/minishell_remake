@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:55:44 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 21:44:20 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -148,6 +148,7 @@ int		ft_unset(char **buf, t_env **env_list);
 void	print_env_list(t_env *env);
 void	ft_lstprint(t_list *lst);
 void	print_cmd(t_cmd *cmd);
+void	print_dchar(char **str);
 
 int		is_quote(char c);
 char	*rm_quote(char *data);

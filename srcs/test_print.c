@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 16:29:16 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 17:04:16 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/09 21:48:41 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,14 @@ void	print_cmd(t_cmd *cmd)
 		print_env_list(cmd->redir);
 		cmd = cmd->next;
 	}
+}
+
+void	print_dchar(char **str)
+{
+	while (*str)
+	{
+		printf("%s\n", *str);
+		str++;
+	}
+	printf("END\n");
 }
