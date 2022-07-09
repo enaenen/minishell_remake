@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/27 06:38:51 by wchae             #+#    #+#              #
-#    Updated: 2022/07/04 04:04:02 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/09 17:39:59 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -40,7 +40,13 @@ SRCS			= ft_putstr_fd.c\
 				ft_free_split.c\
 				ft_str_buffer.c\
 				ft_strchr.c\
-				
+				ft_lstaddback.c\
+				ft_lstclear.c\
+				ft_lstlast.c\
+				ft_lstnew.c\
+				ft_lstsize.c\
+				ft_gnl.c
+
 
 OBJS			= $(SRCS:.c=.o)
 BONUS_OBJS		= $(BONUS:.c=.o)
@@ -57,7 +63,7 @@ all:			$(NAME)
 $(NAME):		$(OBJ_FILES)
 				ar rc $(NAME) $(OBJ_FILES)
 
-bonus: 
+bonus:
 	make WITH_BONUS=1
 
 clean:
@@ -66,8 +72,8 @@ clean:
 fclean:			clean
 				$(RM) $(NAME)
 
-re:				
-				make fclean 
+re:
+				make fclean
 				make all
 
 .PHONY:			all clean fclean re bonus

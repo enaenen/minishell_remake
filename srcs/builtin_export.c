@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 18:43:23 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 15:50:37 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/09 16:49:44 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 t_env	*env_dup_check(t_env *env_list, char *new_key)
 {

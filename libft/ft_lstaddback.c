@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_pwd.c                                      :+:      :+:    :+:   */
+/*   ft_lstaddback.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/28 00:14:31 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 16:49:31 by wchae            ###   ########.fr       */
+/*   Created: 2022/07/09 17:07:59 by wchae             #+#    #+#             */
+/*   Updated: 2022/07/09 17:08:07 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int	ft_pwd(void)
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	char	*buf;
-
-	buf = getcwd(NULL, 0);
-	printf("%s\n", buf);
-	free (buf);
-	return (0);
+	if (!lst || !new)
+		return ;
+	if (!*lst)
+		*lst = new;
+	else
+		ft_lstlast(*lst)->next = new;
 }

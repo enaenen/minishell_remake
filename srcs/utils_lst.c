@@ -1,47 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lst_utils.c                                        :+:      :+:    :+:   */
+/*   utils_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:51:29 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 15:12:05 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/09 17:13:10 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
-int		ft_lstsize(t_list *lst)
+char	**lst_to_strs(t_list *lst)
 {
-	int	i;
+	t_list	*tmp;
+	char	**strs;
+	int		i;
 
+	i = 0;
+	tmp = lst;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	strs = malloc(sizeof(char *) * (i + 1));
+	strs[i] = NULL;
 	i = 0;
 	while (lst)
 	{
+		strs[i++] = lst->data;
 		lst = lst->next;
-		i++;
 	}
-	return (i);
-}
-
-t_list	*ft_lstlast(t_list *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next)
-		lst = lst->next;
-	return (lst);
-}
-
-void	ft_lstadd_back(t_list **lst, t_list *new)
-{
-	if (!lst || !new)
-		return ;
-	if (!*lst)
-		*lst = new;
-	else
-		ft_lstlast(*lst)->next = new;
+	return (strs);
 }
 
 void	env_lstadd_back(t_env **lst, char *key, char *value)
@@ -79,26 +71,6 @@ void	env_lstadd_back_node(t_env **lst, t_env	*node)
 	phead->next = node;
 }
 
-void	cmd_lstadd_back(t_cmd **lst, t_token *tokens)
-{
-	t_cmd	*new;
-	t_cmd	*phead;
-
-	new = malloc(sizeof(t_cmd));
-	new->tokens = tokens;
-	new->redir = NULL;
-	new->next = NULL;
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	phead = *lst;
-	while (phead->next)
-		phead = phead->next;
-	phead->next = new;
-}
-
 char	**tokens_to_strs(t_token *tokens)
 {
 	t_token	*tmp;
@@ -125,20 +97,6 @@ char	**tokens_to_strs(t_token *tokens)
 	return (strs);
 }
 
-void	del_cmd_list(t_cmd *cmd)
-{
-	t_cmd	*tmp;
-
-	tmp = cmd;
-	while (tmp)
-	{
-		tmp = cmd->next;
-		del_env_lst(cmd->tokens);
-		del_env_lst(cmd->redir);
-		free(cmd);
-		cmd = tmp;
-	}
-}
 
 void	del_env_lst(t_env *lst)
 {
@@ -153,34 +111,4 @@ void	del_env_lst(t_env *lst)
 		free(lst);
 		lst = tmp;
 	}
-}
-
-t_list	*ft_lstnew(void *data)
-{
-	t_list	*new;
-
-	new = (t_list *)malloc(sizeof(t_list));
-	if (!new)
-		return (NULL);
-	new->data = data;
-	new->next = NULL;
-	return (new);
-}
-
-void	ft_lstclear(t_list **lst, void (*del)(void *))
-{
-	t_list	*next;
-
-	if (!lst || !*lst || !del)
-		return ;
-	while (*lst)
-	{
-		next = (*lst)->next;
-		del((*lst)->data);
-		(*lst)->data = NULL;
-		free(*lst);
-		*lst = NULL;
-		*lst = next;
-	}
-	*lst = NULL;
 }

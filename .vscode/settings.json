@@ -26,6 +26,9 @@
 		"locale": "c",
 		"philo.h": "c",
 		"philo_bonus.h": "c",
-		"random": "c"
+		"random": "c",
+		"readline.h": "c",
+		"curses.h": "c",
+		"minishell.h": "c"
 	},
 }

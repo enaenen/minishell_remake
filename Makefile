@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seseo <seseo@student.42.fr>                +#+  +:+       +#+         #
+#    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/09 16:18:17 by seseo            ###   ########.fr        #
+#    Updated: 2022/07/09 19:11:08 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,12 +23,6 @@ INCS			=	-Ilibft -I.
 
 SRCS_DIR		=	srcs
 SRCS_NAME		=	main.c\
-					sig_handler.c\
-					exe_handler.c\
-					heredoc.c\
-					lst_utils.c\
-					settings.c\
-					gnl.c\
 					builtin_echo.c\
 					builtin_pwd.c\
 					builtin_exit.c\
@@ -36,7 +30,21 @@ SRCS_NAME		=	main.c\
 					builtin_env.c\
 					builtin_export.c\
 					builtin_unset.c\
-					env_utils.c
+					cmd_list.c\
+					expand.c\
+					handle_builtin.c\
+					handle_execute_pipe.c\
+					handle_execute.c\
+					handle_redirect.c\
+					handle_signal.c\
+					heredoc.c\
+					settings.c\
+					split_token.c\
+					utils_error.c\
+					utils_env.c\
+					utils_lst.c\
+					utils_quote.c\
+					test_print.c
 
 SRCS			=	$(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 
@@ -72,7 +80,7 @@ fclean			: 	clean
 					rm -rf $(LIB)
 					rm -rf $(NAME) $(OBJS_DIR)
 
-re 				:	#fclean
+re 				:	fclean
 					$(MAKE)
 
 .PHONY			: 	all clean fclean re
