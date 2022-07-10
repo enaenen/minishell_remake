@@ -6,49 +6,11 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 18:43:23 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 22:16:24 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 23:23:49 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*replace_env_val(t_env *env, t_buffer *buf, char *data)
-{
-	char	*key;
-	char	*str;
-	int		i;
-
-	i = 1;
-	if (*(data + 1) == '?')
-	{
-		data++;
-		str = ft_itoa(g_status);
-	}
-	else if (*(data + 1) == 0)
-		str = ft_strdup("$");
-	else if (ft_isdigit(*(data + 1)))
-		str = NULL;
-	else
-	{
-		while (data[i] && (ft_isalnum(data[i]) || data[i] == '_'))
-			i++;
-		if (i == 1)
-			str = ft_substr(data, 0, 2);
-		else
-		{
-			key = ft_substr(data, 1, i - 1);
-			if (find_env_node(env, key))
-				str = read_key(env, key);
-			else
-				str = NULL;
-			free(key);
-		}
-		data += (i - 1);
-	}
-	add_str(buf, str);
-	free(str);
-	return (data);
-}
 
 int	export_key_syntax_error(char *s)
 {
@@ -125,6 +87,15 @@ char	**env_key_strs(t_env *env_list)
 	return (strs);
 }
 
+void	print_export_env (t_env *env_list, char **tmp)
+{
+	if (find_env_node(env_list, *tmp)->value)
+		printf("declare -x %s=\"%s\"\n", *tmp,
+			find_env_node(env_list, *tmp)->value);
+	else
+		printf("declare -x %s\n", *tmp);
+}
+
 int	print_export(t_env *env_list)
 {
 	char	**env_keys;
@@ -136,13 +107,7 @@ int	print_export(t_env *env_list)
 	while (*tmp)
 	{
 		if (ft_strncmp(*tmp, "_", -1) != 0)
-		{
-			if (find_env_node(env_list, *tmp)->value)
-				printf("declare -x %s=\"%s\"\n", *tmp,
-					find_env_node(env_list, *tmp)->value);
-			else
-				printf("declare -x %s\n", *tmp);
-		}
+			print_export_env(env_list, tmp);
 		tmp++;
 	}
 	ft_free_split(env_keys);

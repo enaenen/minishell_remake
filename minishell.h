@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 22:13:14 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 23:02:23 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,8 @@ int		process_heredoc(t_token *token);
 void	sig_here_doc_child(int sig);
 void	sig_exec(int sig);
 void	sig_readline(int sig);
+void	backup_fd(int backup_io[2]);
+void	restore_fd(int backup_io[2]);
 
 /* PARSING */
 int		split_token(char *input, t_token **token);
@@ -149,4 +151,6 @@ char	*skip_quote(t_buffer *buf, char *data, int q_flag);
 char	*skip_quote_2(t_buffer *buf, char *data, int q_flag);
 int		find_valid_quot_point(char *data, int start);
 void	rm_quote_tokens(t_token *tokens);
+
+void	ft_kill_exit(void);
 #endif

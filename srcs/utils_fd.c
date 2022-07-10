@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   builtin_env.c                                      :+:      :+:    :+:   */
+/*   utils_fd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/03 20:56:47 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 22:50:54 by wchae            ###   ########.fr       */
+/*   Created: 2022/07/10 22:54:41 by wchae             #+#    #+#             */
+/*   Updated: 2022/07/10 22:55:00 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_env(t_env *env_list)
+void	backup_fd(int backup_io[2])
 {
-	set_env_node(&env_list, ft_strdup("_"), ft_strdup("/usr/bin/env"));
-	while (env_list)
-	{
-		if (env_list->value != NULL)
-			printf("%s=%s\n", (char *)env_list->key, env_list->value);
-		env_list = env_list->next;
-	}
-	return (0);
+	backup_io[0] = dup(STDIN_FILENO);
+	backup_io[1] = dup(STDOUT_FILENO);
+}
+
+void	restore_fd(int backup_io[2])
+{
+	int	rd_io[2];
+
+	rd_io[0] = dup(STDIN_FILENO);
+	rd_io[1] = dup(STDOUT_FILENO);
+	dup2(backup_io[0], STDIN_FILENO);
+	dup2(backup_io[1], STDOUT_FILENO);
+	close(backup_io[0]);
+	close(backup_io[1]);
+	close(rd_io[0]);
+	close(rd_io[1]);
 }
