@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 18:19:40 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:13:14 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ int		execute_builtin_cmd_pipe(t_env *env_list, t_cmd *cmd, char **exe);
 
 /* COMMAND LIST */
 
-t_cmd	*make_cmd_list(t_env *env, t_token *tokens);
+t_cmd	*make_cmd_list(t_token *tokens);
 
 /* REDIRECTION */
 int		apply_redir(t_env *env, t_cmd *cmd);

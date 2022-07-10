@@ -6,17 +6,11 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:15:54 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:38:26 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:14:52 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/**
- *
- * 쪼개는 작업
- *  "echo abc > a.txt"
- * 	"echo abc >" AND "a.txt"
- **/
 
 int	split_redirection_token(char *input, int i, t_token **token)
 {
@@ -57,12 +51,6 @@ int	split_space_token(char *input, int i, t_token **token)
 		i++;
 	return (i);
 }
-/**
- *
- * 쪼개는 작업
- *  "echo abc | ls -l"
- * 	"echo abc" AND "|"" AND "ls -l"
- **/
 
 int	split_pipe_token(char *input, int i, t_token **token)
 {

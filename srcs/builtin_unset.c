@@ -3,16 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_unset.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 16:49:19 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 18:35:45 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:23:44 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 static int	unset_key_syntax_check(char *s);
+static void	delete_env(t_env *del_env, t_env **p_env);
 
 int	ft_unset(char **buf, t_env **env_list)
 {
@@ -21,6 +22,7 @@ int	ft_unset(char **buf, t_env **env_list)
 	int		r_flag;
 
 	r_flag = 0;
+	del_env = NULL;
 	while (*buf)
 	{
 		if (!unset_key_syntax_check(*buf))
@@ -33,19 +35,22 @@ int	ft_unset(char **buf, t_env **env_list)
 		while (*p_env)
 		{
 			if (!ft_strcmp(*buf, (*p_env)->key))
-			{
-				del_env = *p_env;
-				*p_env = ((*p_env)->next);
-				free(del_env->key);
-				free(del_env->value);
-				free(del_env);
-			}
+				delete_env(del_env, p_env);
 			if (*p_env)
 				p_env = &(*p_env)->next;
 		}
 		buf++;
 	}
 	return (r_flag);
+}
+
+static void	delete_env(t_env *del_env, t_env **p_env)
+{
+	del_env = *p_env;
+	*p_env = ((*p_env)->next);
+	free(del_env->key);
+	free(del_env->value);
+	free(del_env);
 }
 
 static int	unset_key_syntax_check(char *s)

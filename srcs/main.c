@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:28:59 by wchae             #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/07/10 22:35:57 by seseo            ###   ########.fr       */
+=======
+/*   Updated: 2022/07/10 22:10:26 by wchae            ###   ########.fr       */
+>>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +65,20 @@ t_token	*parse_input(char *input, t_env *env)
 	return (token);
 }
 
+char	*read_input(t_set *set)
+{
+	char	*input;
+
+	input = readline("minishell$ ");
+	if (input == NULL)
+	{
+		write(1, "\e[Aminishell$ exit\n", 20);
+		tcsetattr(STDOUT_FILENO, TCSANOW, &set->org_term);
+		exit(g_status);
+	}
+	return (input);
+}
+
 int	main(void)
 {
 	t_token	*tokens;
@@ -74,13 +92,7 @@ int	main(void)
 		signal(SIGINT, &sig_readline);
 		signal(SIGQUIT, SIG_IGN);
 		tcsetattr(STDOUT_FILENO, TCSANOW, &set.new_term);
-		input = readline("minishell$ ");
-		if (input == NULL)
-		{
-			write(1, "\e[Aminishell$ exit\n", 20);
-			tcsetattr(STDOUT_FILENO, TCSANOW, &set.org_term);
-			exit(g_status);
-		}
+		input = read_input(&set);
 		tokens = parse_input(input, env);
 		tcsetattr(STDOUT_FILENO, TCSANOW, &set.org_term);
 		if (!tokens)

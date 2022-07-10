@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_execute.c                                   :+:      :+:    :+:   */
+/*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:30:16 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 22:36:34 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:44:24 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -120,7 +120,7 @@ int	do_exec_function(t_env *env, t_token *tokens)
 	int		n_cmd;
 	int		status;
 
-	cmd = make_cmd_list(env, tokens);
+	cmd = make_cmd_list(tokens);
 	set_redir(cmd);
 	tmp = cmd;
 	n_cmd = 0;
