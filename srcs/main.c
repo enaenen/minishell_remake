@@ -3,16 +3,80 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:28:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 04:47:20 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 19:29:19 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_token(t_token	*token)
+static char		*read_input(t_set *set);
+static t_token	*parse_input(char *input);
+static int		check_token(t_token	*token);
+
+int	main(void)
+{
+	t_token	*tokens;
+	t_set	set;
+	t_env	*env;
+	char	*input;
+
+	init_set(&set, &env);
+	while (1)
+	{
+		input = read_input(&set);
+		tokens = parse_input(input);
+		tcsetattr(STDOUT_FILENO, TCSANOW, &set.org_term);
+		if (!tokens)
+		{
+			input = ft_free(input);
+			continue ;
+		}
+		g_status = do_exec_function(env, tokens);
+		input = ft_free(input);
+	}
+	return (0);
+}
+
+static char	*read_input(t_set *set)
+{
+	char	*input;
+
+	signal(SIGINT, &sig_readline);
+	signal(SIGQUIT, SIG_IGN);
+	tcsetattr(STDOUT_FILENO, TCSANOW, &set->new_term);
+	input = readline("minishell$ ");
+	if (input == NULL)
+	{
+		write(1, "\e[Aminishell$ exit\n", 20);
+		tcsetattr(STDOUT_FILENO, TCSANOW, &set->org_term);
+		exit(g_status);
+	}
+	return (input);
+}
+
+static t_token	*parse_input(char *input)
+{
+	t_token	*token;
+	int		status;
+
+	add_history(input);
+	if (split_token(input, &token) == TRUE && check_token(token) == TRUE)
+	{
+		status = process_heredoc(token);
+		if (status)
+		{
+			del_env_lst(token);
+			g_status = status;
+			return (NULL);
+		}
+	}
+	return (token);
+}
+
+static int	check_token(t_token	*token)
 {
 	int	i;
 
@@ -38,58 +102,4 @@ int	check_token(t_token	*token)
 		token = token->next;
 	}
 	return (TRUE);
-}
-
-t_token	*parse_input(char *input, t_env *env)
-{
-	t_token	*token;
-	int		status;
-
-	(void)env;
-	token = NULL;
-	add_history(input);
-	if (split_token(input, &token) == TRUE && check_token(token) == TRUE)
-	{
-		status = process_heredoc(token);
-		if (status)
-		{
-			del_env_lst(token);
-			g_status = status;
-			return (NULL);
-		}
-	}
-	return (token);
-}
-
-int	main(void)
-{
-	t_token	*tokens;
-	t_set	set;
-	t_env	*env;
-	char	*input;
-
-	init_set(&set, &env);
-	while (1)
-	{
-		signal(SIGINT, &sig_readline);
-		signal(SIGQUIT, SIG_IGN);
-		tcsetattr(STDOUT_FILENO, TCSANOW, &set.new_term);
-		input = readline("minishell$ ");
-		if (input == NULL)
-		{
-			write(1, "\e[Aminishell$ exit\n", 20);
-			tcsetattr(STDOUT_FILENO, TCSANOW, &set.org_term);
-			exit(g_status);
-		}
-		tokens = parse_input(input, env);
-		tcsetattr(STDOUT_FILENO, TCSANOW, &set.org_term);
-		if (!tokens)
-		{
-			input = ft_free(input);
-			continue ;
-		}
-		g_status = do_exec_function(env, tokens);
-		input = ft_free(input);
-	}
-	return (0);
 }
