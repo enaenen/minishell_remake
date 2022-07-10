@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 18:43:23 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 03:08:41 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:16:24 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,8 @@ int	print_export(t_env *env_list)
 		if (ft_strncmp(*tmp, "_", -1) != 0)
 		{
 			if (find_env_node(env_list, *tmp)->value)
-				printf("declare -x %s=\"%s\"\n", *tmp, find_env_node(env_list, *tmp)->value);
+				printf("declare -x %s=\"%s\"\n", *tmp,
+					find_env_node(env_list, *tmp)->value);
 			else
 				printf("declare -x %s\n", *tmp);
 		}

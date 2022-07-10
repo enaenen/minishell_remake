@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seseo <seseo@student.42.fr>                +#+  +:+       +#+         #
+#    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/10 18:26:16 by seseo            ###   ########.fr        #
+#    Updated: 2022/07/10 22:12:19 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,9 +32,9 @@ SRCS_NAME		=	main.c\
 					builtin_unset.c\
 					cmd_list.c\
 					expand.c\
-					handle_builtin.c\
-					handle_execute_pipe.c\
-					handle_execute.c\
+					execute_builtin.c\
+					execute_pipe.c\
+					execute.c\
 					handle_redirect.c\
 					handle_signal.c\
 					heredoc.c\
