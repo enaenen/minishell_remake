@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 20:05:39 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 04:06:29 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 18:31:11 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,7 @@ static int	print_err_no_env(char *env_name)
 	char		*err_msg;
 
 	buf = create_buf();
-	add_str(buf, "minishell");
-	add_str(buf, ": cd: ");
+	add_str(buf, "minishell: cd: ");
 	add_str(buf, env_name);
 	add_str(buf, " not set\n");
 	err_msg = put_str(buf);
@@ -59,16 +58,16 @@ int	ft_cd(char **buf, t_env *env_list)
 	char	*pwd;
 	char	*old_pwd;
 
-	old_pwd = getcwd(NULL, 0);
 	if (!buf[0])
 	{
 		if (find_env_node(env_list, "HOME"))
-			dir = read_key(env_list, "HOME");
+			dir = find_env_node(env_list, "HOME")->value;
 		else
 			return (print_err_no_env("HOME"));
 	}
 	else
 		dir = buf[0];
+	old_pwd = getcwd(NULL, 0);
 	if (chdir(dir))
 	{
 		error = errno;

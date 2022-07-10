@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 19:28:10 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 03:32:13 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 17:29:08 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char	**split_skip_quote(char *str)
 		}
 		str++;
 	}
-	if (buf->len != 0)
+	if (buf->len)
 		ft_lstadd_back(&tmp_lst, ft_lstnew(put_str(buf)));
 	strs = lst_to_strs(tmp_lst);
 	ft_lstclear(&tmp_lst, free);

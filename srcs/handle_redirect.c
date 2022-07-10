@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:31:12 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 04:42:06 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 18:00:40 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,37 +45,87 @@ void	set_redir(t_cmd *cmd)
 	}
 }
 
+int	is_redirection(char *str)
+{
+	if (ft_strcmp(str, "<") == 0)
+		return (1);
+	else if (ft_strcmp(str, "<<") == 0)
+		return (2);
+	else if (ft_strcmp(str, ">") == 0)
+		return (3);
+	else if (ft_strcmp(str, ">>") == 0)
+		return (4);
+	else
+		return (0);
+}
+
+int	error_msg_ambiguous(char *str)
+{
+	t_buffer	*buf;
+	char		*err_msg;
+
+	buf = create_buf();
+	add_str(buf, "minishell: ");
+	add_str(buf, str);
+	add_str(buf, ": ambiguous redirect\n");
+	err_msg = put_str(buf);
+	ft_putstr_fd(err_msg, STDERR_FILENO);
+	del_buf(buf);
+	free(err_msg);
+	return (EXIT_FAILURE);
+}
 
 int	apply_redir(t_env *env, t_cmd *cmd)
 {
 	int		fd;
 	t_redir	*redir;
+	int		redir_flag;
+	char	*expanded_str;
+	char	**expanded_strs;
+	int		len;
 
 	redir = cmd->redir;
 	while (redir)
 	{
-		if (ft_strncmp(redir->key, "<", -1) == 0
-			|| ft_strncmp(redir->key, "<<", -1) == 0)
+		redir_flag = is_redirection(redir->key);
+		if (redir_flag && redir_flag != 2)
 		{
-			if (ft_strncmp(redir->key, "<", -1) == 0)
+			expanded_str = expand_str(env, redir->next->key);
+			expanded_strs = split_skip_quote(expanded_str);
+			free(expanded_str);
+			len = 0;
+			while (expanded_strs[len])
+				len++;
+			if (len == 0 || len > 1)
+			{
+				ft_free_split(expanded_strs);
+				return (error_msg_ambiguous(redir->next->key));
+			}
+			free(redir->next->key);
+			redir->next->key = rm_quote(expanded_strs[0]);
+			ft_free_split(expanded_strs);
+		}
+		if (redir_flag == 1 || redir_flag == 2)
+		{
+			if (redir_flag == 1)
 				fd = open(redir->next->key, O_RDONLY);
 			else
 				fd = expand_here_doc(env, redir);
-			if (fd_print_err(fd))
-				return (EXIT_FAILURE);
+			if (fd == -1)
+				return (fd_print_err(redir->next->key));
 			dup2(fd, STDIN_FILENO);
 			close(fd);
 		}
-		else
+		else if (redir_flag == 3 || redir_flag == 4)
 		{
-			if (ft_strncmp(redir->key, ">", -1) == 0)
+			if (redir_flag == 3)
 				fd = open(redir->next->key, O_TRUNC | O_CREAT | O_WRONLY, 0777);
 			else
 				fd = open(redir->next->key,
 						O_APPEND | O_CREAT | O_WRONLY,
 						0777);
-			if (fd_print_err(fd))
-				return (EXIT_FAILURE);
+			if (fd == -1)
+				return (fd_print_err(redir->next->key));
 			dup2(fd, STDOUT_FILENO);
 			close(fd);
 		}

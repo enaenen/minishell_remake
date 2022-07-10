@@ -81,7 +81,6 @@ int		find_valid_env_var_point(char *data)
 	return (index);
 }
 
-
 char	*expand_env_var(t_proc *proc, char *data, int start, char **new_data)
 {
 	char	*tmp;

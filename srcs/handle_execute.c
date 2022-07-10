@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:30:16 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 04:56:31 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 18:21:29 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int	do_actual_path_cmd(t_cmd *cmd, char **args, char **envp)
 {
 	execve(cmd->tokens->key, args, envp);
-	error_msg(strerror(errno));
-	return (127);
+	if (errno != ENOENT)
+		return (error_msg(args[0]));
+	return (error_msg_cmd_not_found(args[0]));
 }
-
 
 int	do_cmd_child(t_env *env, t_cmd *cmd)
 {
@@ -51,13 +51,9 @@ int	do_cmd_child(t_env *env, t_cmd *cmd)
 			path++;
 		}
 		if (errno != ENOENT)
-		{
-			error_msg(strerror(errno));
-			return (126);
-		}
+			return (error_msg(args[0]));
 	}
-	error_msg("command not found");
-	return (127);
+	return (error_msg_cmd_not_found(args[0]));
 }
 
 void	backup_fd(int backup_io[2])
@@ -92,7 +88,8 @@ int	do_cmd(t_env *env, t_cmd *cmd)
 	if (cmd->tokens && check_builtin_cmd(cmd->tokens))
 	{
 		backup_fd(backup_io);
-		apply_redir(env, cmd);
+		if (apply_redir(env, cmd))
+			return (EXIT_FAILURE);
 		args = tokens_to_strs(cmd->tokens);
 		status = execute_builtin_cmd(env, cmd, args);
 		ft_free_split(args);
@@ -104,7 +101,8 @@ int	do_cmd(t_env *env, t_cmd *cmd)
 		exit(EXIT_FAILURE);
 	else if (pid == 0)
 	{
-		apply_redir(env, cmd);
+		if (apply_redir(env, cmd))
+			exit(EXIT_FAILURE);
 		exit(do_cmd_child(env, cmd));
 	}
 	waitpid(-1, &status, 0);

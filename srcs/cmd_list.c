@@ -6,23 +6,12 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 16:53:56 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 00:22:47 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 18:37:18 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-/*
-t_cmd	*cmd_new(t_list *tokens, t_redir *redir)
-{
-	t_cmd	*new;
 
-	new = malloc(sizeof(t_cmd));
-	new->next = NULL;
-	new->tokens = tokens;
-	new->redir = redir;
-	return (new);
-}
-*/
 void	cmd_lstadd_back(t_cmd **lst, t_token *tokens)
 {
 	t_cmd	*new;

@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 04:35:03 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 18:19:40 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,8 @@ typedef struct s_set
 }	t_set;
 
 int		error_msg(char *msg);
-int		fd_print_err(int fd);
+int		error_msg_cmd_not_found(char *msg);
+int		fd_print_err(char *msg);
 void	ft_sig_handler(int status);
 void	sig_here_doc(int sig);
 int		process_heredoc(t_token *token);
