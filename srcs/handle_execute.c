@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:30:16 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 18:21:29 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:36:34 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ int	do_cmd(t_env *env, t_cmd *cmd)
 		exit(EXIT_FAILURE);
 	else if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		if (apply_redir(env, cmd))
 			exit(EXIT_FAILURE);
 		exit(do_cmd_child(env, cmd));

@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:35:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 18:01:40 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:37:34 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ int	do_final_pipe_cmd(t_env *env, t_cmd *cmd, int n_pipe, int prev_fd)
 	}
 	else if (pid == 0)
 	{
+		signal(SIGINT, SIG_DFL);
+		signal(SIGQUIT, SIG_DFL);
 		dup2(prev_fd, STDIN_FILENO);
 		close(prev_fd);
 		if (apply_redir(env, cmd))
@@ -70,6 +72,8 @@ int	do_pipe(t_env *env, t_cmd *cmd, int n_pipe)
 		}
 		else if (pid == 0)
 		{
+			signal(SIGINT, SIG_DFL);
+			signal(SIGQUIT, SIG_DFL);
 			if (prev_fd != -1)
 			{
 				dup2(prev_fd, STDIN_FILENO);

@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:25:48 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 17:46:56 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:32:03 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ int	expand_here_doc(t_env *env, t_redir *redir)
 	if (pipe(io_heredoc))
 		exit(EXIT_FAILURE);
 	buf = create_buf();
-	expanded_str = expand_str(env, redir->value);
+	if (ft_strcmp(redir->next->key, redir->next->value) == 0)
+		expanded_str = expand_str(env, redir->value);
+	else
+		expanded_str = ft_strdup(redir->value);
 	write(io_heredoc[1], expanded_str, ft_strlen(expanded_str));
 	close(io_heredoc[1]);
 	return (io_heredoc[0]);

@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:19:21 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 05:02:54 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:30:52 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,8 @@ int	process_heredoc(t_token *token)
 	{
 		if (ft_strncmp(token->key, "<<", 3) == 0)
 		{
-			str = ft_heredoc(token->next->key);
+			token->next->value = rm_quote(token->next->key);
+			str = ft_heredoc(token->next->value);
 			if (str == NULL)
 				return (EXIT_FAILURE);
 			token->value = str;

@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:28:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 04:47:20 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/10 22:35:57 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int	main(void)
 			input = ft_free(input);
 			continue ;
 		}
+		signal(SIGINT, &sig_exec);
+		signal(SIGQUIT, &sig_exec);
 		g_status = do_exec_function(env, tokens);
 		input = ft_free(input);
 	}
