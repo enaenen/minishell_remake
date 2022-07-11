@@ -3,16 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   utils_command.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 16:53:56 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 09:53:18 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 12:40:45 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	cmd_lstadd_back(t_cmd **lst, t_token *tokens)
+static void	free_pipe_node(t_token **prev);
+static void	cmd_lstadd_back(t_cmd **lst, t_token *tokens);
+
+t_cmd	*make_cmd_list(t_token *tokens)
+{
+	t_cmd	*cmd;
+	t_token	*head;
+	t_token	*prev;
+	t_token	*cur;
+
+	head = tokens;
+	cur = tokens;
+	cmd = NULL;
+	while (cur)
+	{
+		prev = cur;
+		cur = cur->next;
+		free_pipe_node(&prev);
+		if (cur && ft_strncmp(cur->key, "|", -1) == 0)
+		{
+			prev->next = NULL;
+			cmd_lstadd_back(&cmd, head);
+			head = cur->next;
+		}
+	}
+	cmd_lstadd_back(&cmd, head);
+	return (cmd);
+}
+
+static void	free_pipe_node(t_token **prev)
+{
+	if (ft_strncmp((*prev)->key, "|", -1) == 0)
+	{
+		free((*prev)->key);
+		free(*prev);
+	}
+}
+
+static void	cmd_lstadd_back(t_cmd **lst, t_token *tokens)
 {
 	t_cmd	*new;
 	t_cmd	*phead;
@@ -45,35 +83,4 @@ void	del_cmd_list(t_cmd *cmd)
 		free(cmd);
 		cmd = tmp;
 	}
-}
-
-t_cmd	*make_cmd_list(t_token *tokens)
-{
-	t_cmd	*cmd;
-	t_token	*head;
-	t_token	*prev;
-	t_token	*cur;
-
-	head = tokens;
-	cur = tokens;
-	cmd = NULL;
-	while (cur)
-	{
-		prev = cur;
-		cur = cur->next;
-		if (ft_strncmp(prev->key, "|", -1) == 0)
-		{
-			free(prev->key);
-			free(prev);
-			prev = NULL;
-		}
-		if (cur && ft_strncmp(cur->key, "|", -1) == 0)
-		{
-			prev->next = NULL;
-			cmd_lstadd_back(&cmd, head);
-			head = cur->next;
-		}
-	}
-	cmd_lstadd_back(&cmd, head);
-	return (cmd);
 }

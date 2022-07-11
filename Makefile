@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
+#    By: seseo <seseo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/11 09:53:37 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/11 12:33:05 by seseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,14 +28,16 @@ SRCS_NAME		=	main.c\
 					builtin_exit.c\
 					builtin_cd.c\
 					builtin_env.c\
-					builtin_export.c\
+					builtin_export_1.c\
+					builtin_export_2.c\
 					builtin_unset.c\
 					expand.c\
 					execute_builtin.c\
 					execute_pipe.c\
 					execute.c\
 					execute_do_cmd.c\
-					handle_redirect.c\
+					handle_redirect_apply.c\
+					handle_redirect_set.c\
 					handle_signal.c\
 					heredoc.c\
 					settings.c\
@@ -48,8 +50,7 @@ SRCS_NAME		=	main.c\
 					utils_quote.c\
 					utils_quote2.c\
 					utils_fd.c\
-					utils_exe.c\
-					test_print.c
+					utils_exe.c
 
 SRCS			=	$(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 

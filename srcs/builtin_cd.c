@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 20:05:39 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 09:47:38 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 10:08:23 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,3 +82,4 @@ static void	refresh_env_pwd(t_env *env_list, char *pwd, char *old_pwd)
 		if (find_env_node(env_list, "OLDPWD"))
 			set_env_node(&env_list, ft_strdup("OLDPWD"), old_pwd);
 	}
+}

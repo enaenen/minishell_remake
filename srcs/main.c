@@ -3,77 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:28:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 22:46:00 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 12:35:34 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	check_token(t_token	*token)
-{
-	int	i;
-
-	i = 0;
-	while (token)
-	{
-		if (token->key[0] == '|' && (i == 0
-				|| !token->next || token->next->key[0] == '|'))
-			return (error_msg("|"));
-		else if (token->key[0] == '<' || token->key[0] == '>')
-		{
-			if (token->key[1] && token->key[0] != token->key[1])
-				return (error_msg(&token->key[1]));
-			else if (2 < ft_strlen(token->key))
-				return (error_msg(&token->key[2]));
-			else if (!token->next)
-				return (error_msg(NULL));
-			else if (token->next->key[0] == '<'
-				|| token->next->key[0] == '>' || token->next->key[0] == '|')
-				return (error_msg(token->next->key));
-		}
-		i++;
-		token = token->next;
-	}
-	return (TRUE);
-}
-
-t_token	*parse_input(char *input, t_env *env)
-{
-	t_token	*token;
-	int		status;
-
-	(void)env;
-	token = NULL;
-	add_history(input);
-	if (split_token(input, &token) == TRUE && check_token(token) == TRUE)
-	{
-		status = process_heredoc(token);
-		if (status)
-		{
-			del_env_lst(token);
-			g_status = status;
-			return (NULL);
-		}
-	}
-	return (token);
-}
-
-char	*read_input(t_set *set)
-{
-	char	*input;
-
-	input = readline("minishell$ ");
-	if (input == NULL)
-	{
-		write(1, "\e[Aminishell$ exit\n", 20);
-		tcsetattr(STDOUT_FILENO, TCSANOW, &set->org_term);
-		exit(g_status);
-	}
-	return (input);
-}
+static char		*read_input(t_set *set);
+static t_token	*parse_input(char *input);
+static int		check_token(t_token	*tokens);
 
 int	main(void)
 {
@@ -89,7 +30,7 @@ int	main(void)
 		signal(SIGQUIT, SIG_IGN);
 		tcsetattr(STDOUT_FILENO, TCSANOW, &set.new_term);
 		input = read_input(&set);
-		tokens = parse_input(input, env);
+		tokens = parse_input(input);
 		tcsetattr(STDOUT_FILENO, TCSANOW, &set.org_term);
 		if (!tokens)
 		{
@@ -102,4 +43,74 @@ int	main(void)
 		input = ft_free(input);
 	}
 	return (0);
+}
+
+static char	*read_input(t_set *set)
+{
+	char	*input;
+
+	input = readline("minishell$ ");
+	if (input == NULL)
+	{
+		write(1, "\e[Aminishell$ exit\n", 20);
+		tcsetattr(STDOUT_FILENO, TCSANOW, &set->org_term);
+		exit(g_status);
+	}
+	return (input);
+}
+
+static t_token	*parse_input(char *input)
+{
+	t_token	*tokens;
+	int		status;
+
+	tokens = NULL;
+	add_history(input);
+	if (split_token(input, &tokens) == TRUE)
+	{
+		if (check_token(tokens) == 0)
+		{
+			status = process_heredoc(tokens);
+			if (status)
+			{
+				del_env_lst(tokens);
+				g_status = status;
+				return (NULL);
+			}
+		}
+		else
+		{
+			del_env_lst(tokens);
+			return (NULL);
+		}
+	}
+	return (tokens);
+}
+
+static int	check_token(t_token	*tokens)
+{
+	int	i;
+
+	i = 0;
+	while (tokens)
+	{
+		if (tokens->key[0] == '|'
+			&& (!tokens->next || tokens->next->key[0] == '|'))
+			return (error_msg("|"));
+		else if (tokens->key[0] == '<' || tokens->key[0] == '>')
+		{
+			if (tokens->key[1] && tokens->key[0] != tokens->key[1])
+				return (error_msg(&tokens->key[1]));
+			else if (2 < ft_strlen(tokens->key))
+				return (error_msg(&tokens->key[2]));
+			else if (!tokens->next)
+				return (error_msg(NULL));
+			else if (tokens->next->key[0] == '<'
+				|| tokens->next->key[0] == '>' || tokens->next->key[0] == '|')
+				return (error_msg(tokens->next->key));
+		}
+		i++;
+		tokens = tokens->next;
+	}
+	return (EXIT_SUCCESS);
 }

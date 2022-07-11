@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_pipe.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:35:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 10:02:22 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 11:25:14 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ static int	do_pipe_cmd(t_env *env, t_cmd *cmd)
 {
 	expand_tokens(env, cmd->tokens);
 	rm_quote_tokens(cmd->tokens);
-	if (!cmd->tokens->key)
+	if (!cmd->tokens || !cmd->tokens->key)
 		return (EXIT_SUCCESS);
 	if (check_builtin_cmd(cmd->tokens))
 		return (execute_builtin_cmd_pipe(

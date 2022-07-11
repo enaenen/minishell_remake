@@ -8,19 +8,12 @@ make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # This program built for i386-apple-darwin11.3.0
  
 
-<<<<<<< HEAD
-# Make data base, printed on Sun Jul 10 21:14:25 2022
-=======
-# Make data base, printed on Sun Jul 10 21:53:24 2022
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
+# Make data base, printed on Mon Jul 11 12:33:16 2022
 
 # Variables
- 
 
 # makefile (from `Makefile', line 15)
 READLINE_DIR = readline
-# environment
-VSCODE_GIT_ASKPASS_MAIN = /Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass-main.js
 # automatic
 <D = $(patsubst %/,%,$(dir $<))
 # automatic
@@ -34,7 +27,7 @@ VSCODE_LOG_NATIVE = false
 # automatic
 @F = $(notdir $@)
 # makefile
-CURDIR := /goinfre/seseo/minishell_remake
+CURDIR := /Users/seseo/minishell
 # makefile
 SHELL = /bin/sh
 # environment
@@ -44,49 +37,46 @@ _ = /usr/bin/make
 # makefile (from `Makefile', line 20)
 CFLAGS = -Wall -Werror -Wextra -g 
 # makefile (from `Makefile', line 25)
-SRCS_NAME = main.c builtin_echo.c builtin_pwd.c builtin_exit.c builtin_cd.c builtin_env.c builtin_export.c builtin_unset.c cmd_list.c expand.c handle_builtin.c handle_execute_pipe.c handle_execute.c handle_redirect.c handle_signal.c heredoc.c settings.c split_token.c utils_error.c utils_env.c utils_lst.c utils_quote.c utils_quote2.c test_print.c
+SRCS_NAME = main.c builtin_echo.c builtin_pwd.c builtin_exit.c builtin_cd.c builtin_env.c builtin_export_1.c builtin_export_2.c builtin_unset.c expand.c execute_builtin.c execute_pipe.c execute.c execute_do_cmd.c handle_redirect_apply.c handle_redirect_set.c handle_signal.c heredoc.c settings.c split_token.c utils_command.c utils_error.c utils_env.c utils_env2.c utils_lst.c utils_quote.c utils_quote2.c utils_fd.c utils_exe.c
 # makefile (from `Makefile', line 1)
 MAKEFILE_LIST :=  Makefile
-# makefile (from `Makefile', line 55)
+# makefile (from `Makefile', line 60)
 LIB_DIR = libft
+ 
 # environment
 VSCODE_VERBOSE_LOGGING = true
-# makefile (from `Makefile', line 53)
+# makefile (from `Makefile', line 58)
 OBJS = $(addprefix $(OBJS_DIR)/, $(SRCS_NAME:.c=.o))
 # makefile (from `Makefile', line 22)
 INCS = -Ilibft -I.
 # environment
-<<<<<<< HEAD
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cmcm003535/T/vscode-ipc-8e154f73-0fca-42cb-81bb-d695ccc66461.sock
-=======
-VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cmcm003535/T/vscode-ipc-ca3baf94-7392-48ec-a897-e2356666b5b6.sock
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
+VSCODE_IPC_HOOK_EXTHOST = /var/folders/zz/zyxvpxvq6csfxvn_n000cmcm003535/T/vscode-ipc-d9af7896-4a59-455f-a77e-0d1082c8b467.sock
 # makefile (from `Makefile', line 17)
 READLINE = $(READLINE_DIR)/libreadline.a
 # environment
-VSCODE_CWD = /Users/seseo/goinfre/minishell_remake
+VSCODE_CWD = /
 # environment
-PATH = /Users/seseo/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Users/seseo/.brew/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
+PATH = /Users/seseo/.brew/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/munki:/Applications/Visual Studio Code.app/Contents/Resources/app/bin
 # environment
-LaunchInstanceID = CC5CE1EA-58FB-4DAF-B198-E41F4D0FF167
+LaunchInstanceID = E61D9EFE-E04E-4C1A-9F0F-137D55FDF151
 # makefile (from `Makefile', line 24)
 SRCS_DIR = srcs
 # environment
 VSCODE_LOG_STACK = false
 # environment
 ELECTRON_RUN_AS_NODE = 1
-# makefile (from `Makefile', line 57)
+# makefile (from `Makefile', line 62)
 LIB = $(addprefix $(LIB_DIR)/, libft.a)
 # default
 .FEATURES := target-specific order-only second-expansion else-if archives jobserver check-symlink
 # environment
-SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.tcFbhuMfoC/Listeners
+SSH_AUTH_SOCK = /private/tmp/com.apple.launchd.6nHQqpFMLG/Listeners
 # automatic
 %F = $(notdir $%)
 # environment
 VSCODE_PIPE_LOGGING = true
 # environment
-PWD = /Users/seseo/goinfre/minishell_remake
+PWD = /Users/seseo/minishell
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = undefined
 # environment
@@ -108,19 +98,15 @@ VSCODE_HANDLES_UNCAUGHT_ERRORS = true
 # automatic
 ^D = $(patsubst %/,%,$(dir $^))
 # environment
-MAKELEVEL := 0
-# environment
 XPC_FLAGS = 0x0
-# environment
-COLORTERM = truecolor
 # default
 MAKE = $(MAKE_COMMAND)
 # default
 MAKECMDGOALS := all
-# makefile (from `Makefile', line 50)
+# makefile (from `Makefile', line 55)
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRCS_NAME))
 # environment
-SHLVL = 2
+SHLVL = 1
 # makefile (from `Makefile', line 19)
 CC = gcc
 # default
@@ -135,10 +121,6 @@ NAME = minishell
 %D = $(patsubst %/,%,$(dir $%))
 # default
 MAKE_COMMAND := /Applications/Xcode.app/Contents/Developer/usr/bin/make
-# environment
-VSCODE_GIT_ASKPASS_EXTRA_ARGS = --ms-enable-electron-run-as-node
-# environment
-TERM_PROGRAM = vscode
 # default
 .VARIABLES := 
 # environment
@@ -147,8 +129,6 @@ TMPDIR = /var/folders/zz/zyxvpxvq6csfxvn_n000cmcm003535/T/
 *F = $(notdir $*)
 # environment
 VSCODE_IPC_HOOK = /Users/seseo/Library/Application Support/Code/1.67.2-main.sock
-# environment
-VSCODE_GIT_ASKPASS_NODE = /Applications/Visual Studio Code.app/Contents/MacOS/Electron
 # makefile
 MAKEFLAGS = Rrqp
 # environment
@@ -156,16 +136,10 @@ MFLAGS = -Rrqp
 # automatic
 *D = $(patsubst %/,%,$(dir $*))
 # environment
-TERM_PROGRAM_VERSION = 1.67.2
-# environment
 EMAIL = seseo@student.42seoul.kr
 # environment
-<<<<<<< HEAD
-XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000002.Electron
-=======
-XPC_SERVICE_NAME = com.microsoft.VSCode.6952.62170483-4983-4B98-9491-4F77FEB413C9
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-# makefile (from `Makefile', line 52)
+XPC_SERVICE_NAME = com.apple.xpc.launchd.oneshot.0x10000008.Electron
+# makefile (from `Makefile', line 57)
 OBJS_DIR = objs
 # automatic
 +D = $(patsubst %/,%,$(dir $+))
@@ -175,8 +149,6 @@ OBJS_DIR = objs
 __CF_USER_TEXT_ENCODING = 0x19465:0x0:0x0
 # environment
 COMMAND_MODE = unix2003
-# environment
-GIT_ASKPASS = /Applications/Visual Studio Code.app/Contents/Resources/app/extensions/git/dist/askpass.sh
 # default
 MAKEFILES := 
 # automatic
@@ -184,31 +156,24 @@ MAKEFILES :=
 # environment
 LC_ALL = C
 # environment
-SECURITYSESSIONID = 186a6
+SECURITYSESSIONID = 186be
 # automatic
 ^F = $(notdir $^)
 # default
 SUFFIXES := 
-# makefile (from `Makefile', line 56)
+# makefile (from `Makefile', line 61)
 LIB_NAME = ft
 # default
 .INCLUDE_DIRS = /usr/local/include
 # environment
-VSCODE_GIT_IPC_HANDLE = /var/folders/zz/zyxvpxvq6csfxvn_n000cmcm003535/T/vscode-git-cf2ef15953.sock
+MAKELEVEL := 0
+ 
 # environment
 LANG = C
 # environment
-<<<<<<< HEAD
-VSCODE_PID = 3845
+VSCODE_PID = 82074
 # variable set hash-table stats:
 # Load=79/1024=8%, Rehash=0, Collisions=3/125=2%
-=======
-TERM = xterm-256color
-# environment
-VSCODE_PID = 3845
-# variable set hash-table stats:
-# Load=88/1024=9%, Rehash=0, Collisions=5/127=4%
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
 
 # Pattern-specific Variable Values
 
@@ -216,22 +181,15 @@ VSCODE_PID = 3845
 
 # Directories
 
-<<<<<<< HEAD
- 
-# . (device 16777225, inode 10143725): 13 files, no impossibilities.
-# srcs (device 16777225, inode 10144280): 19 files, no impossibilities so far.
-=======
-# . (device 16777220, inode 1152921500313240069): 13 files, no impossibilities.
- 
-# srcs (device 16777220, inode 1152921500313240336): 27 files, no impossibilities so far.
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
+# . (device 16777225, inode 10143725): 12 files, no impossibilities.
+# srcs (device 16777225, inode 10144280): 20 files, no impossibilities so far.
 
 # 32 files, no impossibilities in 2 directories.
 
 # Implicit Rules
 
 objs/%.o: srcs/%.c
-#  commands to execute (from `Makefile', line 70):
+#  commands to execute (from `Makefile', line 75):
 	mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
 	
@@ -241,91 +199,51 @@ objs/%.o: srcs/%.c
 # Files
 
 # Not a target:
-srcs/builtin_unset.c:
-#  Implicit rule search has been done.
-<<<<<<< HEAD
-#  Last modified 2022-07-10 18:35:45
-=======
-#  Last modified 2022-07-10 21:51:35
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-<<<<<<< HEAD
-# Not a target:
-objs/handle_builtin.o:
+objs/utils_fd.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-
-# Not a target:
-objs/cmd_list.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-=======
-objs/handle_builtin.o: srcs/handle_builtin.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `handle_builtin'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-objs/cmd_list.o: srcs/cmd_list.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `cmd_list'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
 
 objs/main.o: srcs/main.c
 #  Implicit rule search has been done.
 #  Implicit/static pattern stem: `main'
-<<<<<<< HEAD
-#  Last modified 2022-07-10 18:31:15
-=======
-#  Last modified 2022-07-10 21:52:59
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
+#  File does not exist.
 #  File has been updated.
-#  Successfully updated.
+#  Needs to be updated (-q is set).
+# automatic
+# @ := objs/main.o
+# automatic
+# % := 
+# automatic
+# * := main
+# automatic
+# + := srcs/main.c
+# automatic
+# | := 
+# automatic
+# < := srcs/main.c
+# automatic
+# ^ := srcs/main.c
+# automatic
+# ? := srcs/main.c
 # variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
+# Load=8/32=25%, Rehash=0, Collisions=1/17=6%
+#  commands to execute (from `Makefile', line 75):
 	mkdir -p $(OBJS_DIR)
 	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
 	
 
-objs/builtin_cd.o: srcs/builtin_cd.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `builtin_cd'
-<<<<<<< HEAD
-#  Last modified 2022-07-10 18:31:15
-=======
-#  Last modified 2022-07-10 21:52:59
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
+# Not a target:
+objs/builtin_cd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/execute_do_cmd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 all: minishell
 #  Phony target (prerequisite of .PHONY).
@@ -342,7 +260,6 @@ all: minishell
 #  Modification time never checked.
 #  File has not been updated.
 
-<<<<<<< HEAD
 # Not a target:
 objs/expand.o:
 #  Implicit rule search has not been done.
@@ -350,7 +267,191 @@ objs/expand.o:
 #  File has not been updated.
 
 # Not a target:
+objs/handle_redirect_set.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/execute.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/utils_command.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.SUFFIXES:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/settings.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+Makefile:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-11 12:33:05
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+srcs/main.c:
+#  Implicit rule search has been done.
+#  Last modified 2022-07-11 12:32:56
+#  File has been updated.
+#  Successfully updated.
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
+
+# Not a target:
+objs/builtin_echo.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/split_token.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
 objs/utils_env.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+readline/libreadline.a:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 68):
+	@cd $(READLINE_DIR); ./configure
+	@$(MAKE) -C $(READLINE_DIR) all
+	
+
+minishell: libft/libft.a objs/main.o objs/builtin_echo.o objs/builtin_pwd.o objs/builtin_exit.o objs/builtin_cd.o objs/builtin_env.o objs/builtin_export_1.o objs/builtin_export_2.o objs/builtin_unset.o objs/expand.o objs/execute_builtin.o objs/execute_pipe.o objs/execute.o objs/execute_do_cmd.o objs/handle_redirect_apply.o objs/handle_redirect_set.o objs/handle_signal.o objs/heredoc.o objs/settings.o objs/split_token.o objs/utils_command.o objs/utils_error.o objs/utils_env.o objs/utils_env2.o objs/utils_lst.o objs/utils_quote.o objs/utils_quote2.o objs/utils_fd.o objs/utils_exe.o readline/libreadline.a
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has been updated.
+#  Needs to be updated (-q is set).
+# variable set hash-table stats:
+# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
+#  commands to execute (from `Makefile', line 65):
+	$(CC) $(CFLAGS) $(INCS) -L$(LIB_DIR) -l$(LIB_NAME) -L$(READLINE_DIR) -lreadline -lhistory -lncurses $(OBJS) -o $@
+	
+
+libft/libft.a:
+#  Implicit rule search has not been done.
+#  Last modified 2022-07-11 12:33:08
+#  File has been updated.
+#  Successfully updated.
+#  commands to execute (from `Makefile', line 72):
+	$(MAKE) -C $(LIB_DIR) all
+	
+
+fclean: clean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 86):
+	rm -rf $(LIB)
+	rm -rf $(NAME) $(OBJS_DIR)
+	
+
+# Not a target:
+objs/utils_exe.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/builtin_export_1.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/utils_quote.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+.DEFAULT:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/handle_redirect_apply.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/builtin_env.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+re: fclean
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 90):
+	$(MAKE)
+	
+
+# Not a target:
+objs/builtin_exit.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+clean:
+#  Phony target (prerequisite of .PHONY).
+#  Implicit rule search has not been done.
+#  File does not exist.
+#  File has not been updated.
+#  commands to execute (from `Makefile', line 81):
+	$(MAKE) -C $(LIB_DIR) clean
+	rm -rf $(OBJS_DIR)
+	
+
+# Not a target:
+objs/builtin_export_2.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/utils_error.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/builtin_pwd.o:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+objs/heredoc.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
@@ -362,655 +463,31 @@ objs/utils_lst.o:
 #  File has not been updated.
 
 # Not a target:
-objs/handle_redirect.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-=======
-objs/expand.o: srcs/expand.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `expand'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-objs/utils_env.o: srcs/utils_env.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `utils_env'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-objs/utils_lst.o: srcs/utils_lst.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `utils_lst'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-# Not a target:
-srcs/utils_quote2.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-srcs/handle_signal.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-objs/handle_redirect.o: srcs/handle_redirect.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `handle_redirect'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-# Not a target:
-srcs/cmd_list.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-
-# Not a target:
-.SUFFIXES:
+objs/execute_builtin.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-<<<<<<< HEAD
 # Not a target:
-objs/settings.o:
+objs/builtin_unset.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-=======
-objs/settings.o: srcs/settings.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `settings'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
 
 # Not a target:
-Makefile:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-srcs/main.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-srcs/builtin_cd.c:
-#  Implicit rule search has been done.
-<<<<<<< HEAD
-#  Last modified 2022-07-10 18:31:11
-=======
-#  Last modified 2022-07-10 21:51:35
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-objs/builtin_echo.o: srcs/builtin_echo.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `builtin_echo'
-<<<<<<< HEAD
-#  Last modified 2022-07-10 18:31:15
-=======
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-objs/split_token.o: srcs/split_token.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `split_token'
-#  Last modified 2022-07-10 21:52:59
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-# Not a target:
-<<<<<<< HEAD
-objs/split_token.o:
+objs/utils_env2.o:
 #  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-=======
-srcs/expand.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-srcs/utils_lst.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-
-objs/builtin_export.o: srcs/builtin_export.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `builtin_export'
-<<<<<<< HEAD
-#  Last modified 2022-07-10 18:31:15
-=======
-#  Last modified 2022-07-10 21:52:59
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-readline/libreadline.a:
-#  Implicit rule search has not been done.
-<<<<<<< HEAD
-#  Modification time never checked.
-#  File has not been updated.
-=======
-#  Last modified 2022-07-10 21:51:58
-#  File has been updated.
-#  Successfully updated.
  
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  commands to execute (from `Makefile', line 63):
-	@cd $(READLINE_DIR); ./configure
-	@$(MAKE) -C $(READLINE_DIR) all
-	
-
-# Not a target:
-<<<<<<< HEAD
-objs/handle_execute_pipe.o:
-#  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
-minishell: libft/libft.a objs/main.o objs/builtin_echo.o objs/builtin_pwd.o objs/builtin_exit.o objs/builtin_cd.o objs/builtin_env.o objs/builtin_export.o objs/builtin_unset.o objs/cmd_list.o objs/expand.o objs/handle_builtin.o objs/handle_execute_pipe.o objs/handle_execute.o objs/handle_redirect.o objs/handle_signal.o objs/heredoc.o objs/settings.o objs/split_token.o objs/utils_error.o objs/utils_env.o objs/utils_lst.o objs/utils_quote.o objs/utils_quote2.o objs/test_print.o readline/libreadline.a
-#  Implicit rule search has not been done.
-#  Last modified 2022-07-10 18:31:16
-=======
-srcs/utils_env.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-objs/handle_execute_pipe.o: srcs/handle_execute_pipe.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `handle_execute_pipe'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-minishell: libft/libft.a objs/main.o objs/builtin_echo.o objs/builtin_pwd.o objs/builtin_exit.o objs/builtin_cd.o objs/builtin_env.o objs/builtin_export.o objs/builtin_unset.o objs/cmd_list.o objs/expand.o objs/handle_builtin.o objs/handle_execute_pipe.o objs/handle_execute.o objs/handle_redirect.o objs/handle_signal.o objs/heredoc.o objs/settings.o objs/split_token.o objs/utils_error.o objs/utils_env.o objs/utils_lst.o objs/utils_quote.o objs/utils_quote2.o objs/test_print.o readline/libreadline.a
-#  Implicit rule search has not been done.
-#  Last modified 2022-07-10 21:52:59
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/7=0%
-#  commands to execute (from `Makefile', line 60):
-	$(CC) $(CFLAGS) $(INCS) -L$(LIB_DIR) -l$(LIB_NAME) -L$(READLINE_DIR) -lreadline -lhistory -lncurses $(OBJS) -o $@
-	
-
-<<<<<<< HEAD
-libft/libft.a:
-#  Implicit rule search has not been done.
-#  Last modified 2022-07-10 18:31:16
-=======
 # Not a target:
-srcs/handle_builtin.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-srcs/handle_redirect.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-libft/libft.a:
-#  Implicit rule search has not been done.
-#  Last modified 2022-07-10 21:52:59
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  File has been updated.
-#  Successfully updated.
-#  commands to execute (from `Makefile', line 67):
-	$(MAKE) -C $(LIB_DIR) all
-	
-
-<<<<<<< HEAD
-=======
-# Not a target:
-srcs/settings.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-fclean: clean
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 81):
-	rm -rf $(LIB)
-	rm -rf $(NAME) $(OBJS_DIR)
-	
-
-# Not a target:
-srcs/builtin_echo.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-<<<<<<< HEAD
-=======
-srcs/split_token.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-srcs/builtin_export.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-<<<<<<< HEAD
-# Not a target:
-objs/test_print.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-=======
-objs/test_print.o: srcs/test_print.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `test_print'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-objs/utils_quote.o: srcs/utils_quote.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `utils_quote'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-
-# Not a target:
-objs/utils_quote.o:
+objs/execute_pipe.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
 
 # Not a target:
-<<<<<<< HEAD
-.DEFAULT:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-=======
-srcs/handle_execute_pipe.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-
-objs/builtin_env.o: srcs/builtin_env.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `builtin_env'
-<<<<<<< HEAD
-#  Last modified 2022-07-10 18:31:15
-=======
-#  Last modified 2022-07-10 21:52:59
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-re: fclean
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 85):
-	$(MAKE)
-	
-
-objs/builtin_exit.o: srcs/builtin_exit.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `builtin_exit'
-<<<<<<< HEAD
- 
-#  Last modified 2022-07-10 18:31:15
-=======
-#  Last modified 2022-07-10 21:52:59
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-clean:
-#  Phony target (prerequisite of .PHONY).
-#  Implicit rule search has not been done.
-#  File does not exist.
-#  File has not been updated.
-#  commands to execute (from `Makefile', line 76):
-	$(MAKE) -C $(LIB_DIR) clean
-	rm -rf $(OBJS_DIR)
-	
-
-<<<<<<< HEAD
-# Not a target:
-objs/handle_execute.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-
-# Not a target:
-objs/utils_error.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-=======
-objs/handle_execute.o: srcs/handle_execute.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `handle_execute'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-objs/utils_error.o: srcs/utils_error.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `utils_error'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-
-objs/builtin_pwd.o: srcs/builtin_pwd.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `builtin_pwd'
-<<<<<<< HEAD
-#  Last modified 2022-07-10 18:31:15
-=======
-#  Last modified 2022-07-10 21:52:59
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-# Not a target:
-<<<<<<< HEAD
-objs/heredoc.o:
-#  Implicit rule search has not been done.
-#  Modification time never checked.
-#  File has not been updated.
-=======
-srcs/test_print.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-objs/heredoc.o: srcs/heredoc.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `heredoc'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-# Not a target:
-srcs/utils_quote.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
- 
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-
-objs/builtin_unset.o: srcs/builtin_unset.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `builtin_unset'
-<<<<<<< HEAD
-#  Last modified 2022-07-10 18:31:15
-=======
-#  Last modified 2022-07-10 21:52:59
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-#  File has been updated.
-#  Needs to be updated (-q is set).
-# automatic
-# @ := objs/builtin_unset.o
-# automatic
-# % := 
-# automatic
-# * := builtin_unset
-# automatic
-# + := srcs/builtin_unset.c
-# automatic
-# | := 
-# automatic
-# < := srcs/builtin_unset.c
-# automatic
-# ^ := srcs/builtin_unset.c
-# automatic
-# ? := srcs/builtin_unset.c
-# variable set hash-table stats:
-# Load=8/32=25%, Rehash=0, Collisions=1/17=6%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-# Not a target:
-srcs/builtin_env.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-srcs/builtin_exit.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-<<<<<<< HEAD
-=======
-srcs/handle_execute.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-srcs/utils_error.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
-srcs/builtin_pwd.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-# Not a target:
-<<<<<<< HEAD
 objs/utils_quote2.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
@@ -1021,44 +498,9 @@ objs/handle_signal.o:
 #  Implicit rule search has not been done.
 #  Modification time never checked.
 #  File has not been updated.
-=======
-srcs/heredoc.c:
-#  Implicit rule search has been done.
-#  Last modified 2022-07-10 21:51:35
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-
-objs/utils_quote2.o: srcs/utils_quote2.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `utils_quote2'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
-
-objs/handle_signal.o: srcs/handle_signal.c
-#  Implicit rule search has been done.
-#  Implicit/static pattern stem: `handle_signal'
-#  Last modified 2022-07-10 21:52:59
-#  File has been updated.
-#  Successfully updated.
-# variable set hash-table stats:
-# Load=0/32=0%, Rehash=0, Collisions=0/0=0%
-#  commands to execute (from `Makefile', line 70):
-	mkdir -p $(OBJS_DIR)
-	$(CC) $(CFLAGS) $(INCS) $(CPPFLAGS) -c $< -o $@
-	
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
 
 # files hash-table stats:
-# Load=43/1024=4%, Rehash=0, Collisions=2/113=2%
+# Load=41/1024=4%, Rehash=0, Collisions=3/95=3%
 # VPATH Search Paths
 
 # No `vpath' search paths.
@@ -1070,10 +512,6 @@ objs/handle_signal.o: srcs/handle_signal.c
 # strcache size: total = 4096 / max = 4096 / min = 4096 / avg = 4096
 # strcache free: total = 4087 / max = 4087 / min = 4087 / avg = 4087
 
-<<<<<<< HEAD
-# Finished Make data base on Sun Jul 10 21:14:25 2022
-=======
-# Finished Make data base on Sun Jul 10 21:53:24 2022
->>>>>>> dd0f456ca2a6fa0082f2e2cbfabc1effc648d814
+# Finished Make data base on Mon Jul 11 12:33:16 2022
 
  

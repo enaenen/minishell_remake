@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 01:13:51 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 12:46:20 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@
 # define S_QUOTE 1
 # define D_QUOTE 2
 
-
 extern char			**environ;
 int					g_status;
 
@@ -63,9 +62,12 @@ typedef struct s_set
 }	t_set;
 
 void	init_set(t_set *set, t_env **env);
-int		fd_print_err(char *msg);
+
 int		error_msg(char *msg);
 int		error_msg_cmd_not_found(char *msg);
+int		fd_print_err(char *str);
+int		error_msg_ambiguous(char *str);
+
 void	restore_fd(int backup_io[2]);
 void	backup_fd(int backup_io[2]);
 
@@ -97,7 +99,6 @@ void	env_lstadd_back_node(t_env **lst, t_env	*node);
 t_env	*env_dup_check(t_env *env_list, char *new_key);
 void	del_env_lst(t_env *lst);
 void	del_cmd_list(t_cmd *cmd);
-void	cmd_lstadd_back(t_cmd **lst, t_token *tokens);
 char	**tokens_to_strs(t_token *tokens);
 char	**lst_to_strs(t_list *lst);
 t_cmd	*make_cmd_list(t_token *tokens);
@@ -112,6 +113,7 @@ char	*replace_env_val(t_env *env, t_buffer *buf, char *data);
 /* REDIRECTION */
 int		apply_redir(t_env *env, t_cmd *cmd);
 void	set_redir(t_cmd *cmd);
+int		is_redirection(char *str);
 
 
 /* EXECUTE FUNCTIONS */
@@ -121,7 +123,6 @@ int		execute_builtin_cmd_pipe(t_env *env_list, t_cmd *cmd, char **exe);
 int		do_cmd(t_env *env, t_cmd *cmd);
 int		do_exec_function(t_env *env, t_token *tokens);
 int		do_pipe(t_env *env, t_cmd *cmd, int n_pipe);
-int		do_pipe_cmd(t_env *env, t_cmd *cmd);
 int		do_actual_path_cmd(t_cmd *cmd, char **args, char **envp);
 int		do_cmd_child(t_env *env, t_cmd *cmd);
 
@@ -134,6 +135,10 @@ int		ft_cd(char **buf, t_env *env_list);
 int		ft_env(t_env *env_list);
 int		ft_export(char **buf, t_env *env_list);
 int		ft_unset(char **buf, t_env **env_list);
+
+int		export_key_syntax_error(char *s);
+char	**env_key_strs(t_env *env_list);
+void	sort_env(char **env);
 
 /* for TESTs */
 void	print_env_list(t_env *env);

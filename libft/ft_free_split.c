@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/30 15:21:07 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 21:59:38 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 10:10:03 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ void	ft_free_split(char **arr)
 	int	i;
 
 	i = 0;
-
 	while (arr && arr[i])
 		free(arr[i++]);
 	free(arr);

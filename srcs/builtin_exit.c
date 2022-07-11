@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 18:43:07 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 09:51:40 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 10:11:03 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ static int	exit_num_arg_cal(char *arg)
 	ret = ft_atoi(arg);
 	return (ret);
 }
-
 
 static int	exit_extra_cases(int c, char *s)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:21:44 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/09 19:50:15 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 10:10:21 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@
 # define SUCCESS 1
 # define END_OF_FILE 0
 # define ERROR -1
-
 
 typedef struct s_list
 {
