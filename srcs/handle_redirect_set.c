@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:31:12 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:55:52 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 22:20:03 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,29 @@ void	set_redir(t_cmd *cmd)
 	}
 }
 
+void	test_printcmd(t_cmd *cmd)
+{
+	t_cmd *pcmd;
+
+	pcmd = cmd;
+	while (pcmd)
+	{
+		printf("Tk = %s Tv = %s \n",pcmd->tokens->key, pcmd->tokens->value);
+		// printf("Rk = %s Rv = %s \n",pcmd->redir->key, pcmd->redir->value);
+		pcmd = pcmd->next;
+	}
+}
+void 	testprint(t_token *tk)
+{
+	t_token	*map;
+
+	map = tk;
+	while (map)
+	{
+		printf("key : %s value : %s\n", map->key, map->value);
+		map = map->next;
+	}
+}
 static void	set_redir_from_cur_tokens(t_cmd *cmd_tmp, t_token *cur)
 {
 	t_token	*head;
@@ -37,6 +60,7 @@ static void	set_redir_from_cur_tokens(t_cmd *cmd_tmp, t_token *cur)
 	head = NULL;
 	while (cur)
 	{
+		testprint(cur);
 		if (is_redirection(cur->key))
 		{
 			head = cur;

@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 16:53:56 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 18:56:04 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 22:16:51 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	free_pipe_node(t_token **prev);
 static void	cmd_lstadd_back(t_cmd **lst, t_token *tokens);
+
 
 t_cmd	*make_cmd_list(t_token *tokens)
 {

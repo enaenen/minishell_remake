@@ -1,0 +1,12 @@
+Makefile
+README.md
+a
+b
+c
+leaks_check.sh
+libft
+minishell
+minishell.h
+objs
+readline
+srcs
