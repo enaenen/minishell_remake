@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
+#    By: seseo <seseo@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/11 13:31:18 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/11 13:52:20 by seseo            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -79,14 +79,14 @@ all				:	$(NAME)
 
 clean			:
 					$(MAKE) -C $(LIB_DIR) clean
-					$(MAKE) -C $(READLINE_DIR) clean
 					rm -rf $(OBJS_DIR)
 
 fclean			: 	clean
+					$(MAKE) -C $(READLINE_DIR) clean
 					rm -rf $(LIB)
 					rm -rf $(NAME) $(OBJS_DIR)
 
-re 				:	fclean
+re 				:	clean
 					$(MAKE)
 
 .PHONY			: 	all clean fclean re
