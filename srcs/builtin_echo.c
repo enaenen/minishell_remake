@@ -6,11 +6,11 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 00:11:28 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:56:25 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 16:32:18 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "minishell.h"
 
 static int	is_option(char *str);
 
@@ -44,8 +44,8 @@ static int	is_option(char *str)
 		str++;
 		while (*str == 'n')
 			str++;
+		if (*str == 0)
+			return (TRUE);
 	}
-	if (*str == 0)
-		return (TRUE);
 	return (FALSE);
 }
