@@ -6,14 +6,14 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 16:49:19 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 22:50:52 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 09:52:13 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-static int	unset_key_syntax_check(char *s);
 static void	delete_env(t_env *del_env, t_env **p_env);
+static int	unset_key_syntax_check(char *s);
 
 int	ft_unset(char **buf, t_env **env_list)
 {

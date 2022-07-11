@@ -6,11 +6,14 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:31:12 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 08:33:03 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 10:05:28 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	is_redirection(char *str);
+int	error_msg_ambiguous(char *str);
 
 void	set_redir(t_cmd *cmd)
 {
@@ -43,36 +46,6 @@ void	set_redir(t_cmd *cmd)
 		}
 		cmd_tmp = cmd_tmp->next;
 	}
-}
-
-int	is_redirection(char *str)
-{
-	if (ft_strcmp(str, "<") == 0)
-		return (1);
-	else if (ft_strcmp(str, "<<") == 0)
-		return (2);
-	else if (ft_strcmp(str, ">") == 0)
-		return (3);
-	else if (ft_strcmp(str, ">>") == 0)
-		return (4);
-	else
-		return (0);
-}
-
-int	error_msg_ambiguous(char *str)
-{
-	t_buffer	*buf;
-	char		*err_msg;
-
-	buf = create_buf();
-	add_str(buf, "minishell: ");
-	add_str(buf, str);
-	add_str(buf, ": ambiguous redirect\n");
-	err_msg = put_str(buf);
-	ft_putstr_fd(err_msg, STDERR_FILENO);
-	del_buf(buf);
-	free(err_msg);
-	return (EXIT_FAILURE);
 }
 
 int	apply_redir(t_env *env, t_cmd *cmd)
@@ -132,4 +105,34 @@ int	apply_redir(t_env *env, t_cmd *cmd)
 		redir = redir->next->next;
 	}
 	return (EXIT_SUCCESS);
+}
+
+static int	is_redirection(char *str)
+{
+	if (ft_strcmp(str, "<") == 0)
+		return (1);
+	else if (ft_strcmp(str, "<<") == 0)
+		return (2);
+	else if (ft_strcmp(str, ">") == 0)
+		return (3);
+	else if (ft_strcmp(str, ">>") == 0)
+		return (4);
+	else
+		return (0);
+}
+
+static int	error_msg_ambiguous(char *str)
+{
+	t_buffer	*buf;
+	char		*err_msg;
+
+	buf = create_buf();
+	add_str(buf, "minishell: ");
+	add_str(buf, str);
+	add_str(buf, ": ambiguous redirect\n");
+	err_msg = put_str(buf);
+	ft_putstr_fd(err_msg, STDERR_FILENO);
+	del_buf(buf);
+	free(err_msg);
+	return (EXIT_FAILURE);
 }

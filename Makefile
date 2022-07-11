@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/11 01:13:52 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/11 09:53:37 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ SRCS_NAME		=	main.c\
 					builtin_env.c\
 					builtin_export.c\
 					builtin_unset.c\
-					cmd_list.c\
 					expand.c\
 					execute_builtin.c\
 					execute_pipe.c\
@@ -41,6 +40,7 @@ SRCS_NAME		=	main.c\
 					heredoc.c\
 					settings.c\
 					split_token.c\
+					utils_command.c\
 					utils_error.c\
 					utils_env.c\
 					utils_env2.c\

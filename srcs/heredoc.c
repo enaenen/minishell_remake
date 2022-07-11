@@ -6,11 +6,14 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:19:21 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 22:50:48 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 10:05:49 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static void	heredoc_child(char *limiter, int *fd);
+char	*here_doc_parent(int fd);
 
 static void	heredoc_child(char *limiter, int *fd)
 {
