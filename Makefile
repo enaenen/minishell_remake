@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: seseo <seseo@student.42.fr>                +#+  +:+       +#+         #
+#    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/11 12:33:05 by seseo            ###   ########.fr        #
+#    Updated: 2022/07/11 12:55:11 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,8 +47,8 @@ SRCS_NAME		=	main.c\
 					utils_env.c\
 					utils_env2.c\
 					utils_lst.c\
-					utils_quote.c\
-					utils_quote2.c\
+					utils_quote_1.c\
+					utils_quote_2.c\
 					utils_fd.c\
 					utils_exe.c
 
