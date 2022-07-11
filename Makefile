@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/11 13:00:23 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/11 13:21:47 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,8 @@ SRCS_NAME		=	main.c\
 					split_token.c\
 					utils_command.c\
 					utils_error.c\
-					utils_env.c\
-					utils_env2.c\
+					utils_env_1.c\
+					utils_env_2.c\
 					utils_lst.c\
 					utils_quote_1.c\
 					utils_quote_2.c\
