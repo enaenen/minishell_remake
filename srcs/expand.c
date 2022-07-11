@@ -6,11 +6,13 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:25:48 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 13:41:50 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/11 17:42:58 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*expand_str_here_doc(t_env *env, char *str);
 
 int	expand_here_doc(t_env *env, t_redir *redir)
 {
@@ -22,12 +24,31 @@ int	expand_here_doc(t_env *env, t_redir *redir)
 		exit(EXIT_FAILURE);
 	buf = create_buf();
 	if (ft_strcmp(redir->next->key, redir->next->value) == 0)
-		expanded_str = expand_str(env, redir->value);
+		expanded_str = expand_str_here_doc(env, redir->value);
 	else
 		expanded_str = ft_strdup(redir->value);
 	write(io_heredoc[1], expanded_str, ft_strlen(expanded_str));
 	close(io_heredoc[1]);
 	return (io_heredoc[0]);
+}
+
+static char	*expand_str_here_doc(t_env *env, char *str)
+{
+	t_buffer	*buf;
+	char		*expanded_str;
+
+	buf = create_buf();
+	while (*str)
+	{
+		if (*str == '$')
+			str = replace_env_val(env, buf, str);
+		else
+			add_char(buf, *str);
+		str++;
+	}
+	expanded_str = put_str(buf);
+	del_buf(buf);
+	return (expanded_str);
 }
 
 char	*expand_str(t_env *env, char *str)
