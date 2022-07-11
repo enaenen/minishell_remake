@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:25:48 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:55:55 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 13:41:50 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,17 @@ int	expand_here_doc(t_env *env, t_redir *redir)
 
 char	*expand_str(t_env *env, char *str)
 {
-	char		*expanded_str;
 	t_buffer	*buf;
+	char		*expanded_str;
+	int			q_flag;
 
 	buf = create_buf();
+	q_flag = 0;
 	while (*str)
 	{
-		if (is_quote(*str) == S_QUOTE)
+		if (is_quote(*str) == D_QUOTE)
+			q_flag ^= is_quote(*str);
+		if (q_flag == 0 && is_quote(*str) == S_QUOTE)
 			str = skip_quote_2(buf, str, is_quote(*str));
 		else if (*str == '$')
 			str = replace_env_val(env, buf, str);
