@@ -6,7 +6,7 @@
 #    By: wchae <wchae@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/11 17:09:27 by wchae             #+#    #+#              #
-#    Updated: 2022/07/10 23:10:27 by wchae            ###   ########.fr        #
+#    Updated: 2022/07/11 01:13:52 by wchae            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,6 +35,7 @@ SRCS_NAME		=	main.c\
 					execute_builtin.c\
 					execute_pipe.c\
 					execute.c\
+					execute_do_cmd.c\
 					handle_redirect.c\
 					handle_signal.c\
 					heredoc.c\
