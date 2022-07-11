@@ -3,13 +3,12 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:46:20 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/11 12:59:33 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -61,15 +60,18 @@ typedef struct s_set
 	struct termios	new_term;
 }	t_set;
 
+/* SET */
 void	init_set(t_set *set, t_env **env);
+void	restore_fd(int backup_io[2]);
+void	backup_fd(int backup_io[2]);
 
+/* ERROR HANDLE */
 int		error_msg(char *msg);
 int		error_msg_cmd_not_found(char *msg);
 int		fd_print_err(char *str);
 int		error_msg_ambiguous(char *str);
-
-void	restore_fd(int backup_io[2]);
-void	backup_fd(int backup_io[2]);
+int		export_key_syntax_error(char *s);
+void	ft_kill_exit(void);
 
 /* SIGNAL */
 void	sig_readline(int sig);
@@ -109,12 +111,13 @@ t_env	*find_env_node(t_env *env_list, char *key);
 char	**get_env_list(t_env **env_list);
 char	*read_key(t_env *env_list, char *key);
 char	*replace_env_val(t_env *env, t_buffer *buf, char *data);
+char	**env_key_strs(t_env *env_list);
+void	sort_env(char **env);
 
 /* REDIRECTION */
 int		apply_redir(t_env *env, t_cmd *cmd);
 void	set_redir(t_cmd *cmd);
 int		is_redirection(char *str);
-
 
 /* EXECUTE FUNCTIONS */
 int		check_builtin_cmd(t_token *tokens);
@@ -136,16 +139,4 @@ int		ft_env(t_env *env_list);
 int		ft_export(char **buf, t_env *env_list);
 int		ft_unset(char **buf, t_env **env_list);
 
-int		export_key_syntax_error(char *s);
-char	**env_key_strs(t_env *env_list);
-void	sort_env(char **env);
-
-/* for TESTs */
-void	print_env_list(t_env *env);
-void	ft_lstprint(t_list *lst);
-void	print_cmd(t_cmd *cmd);
-void	print_dchar(char **str);
-
-
-void	ft_kill_exit(void);
 #endif
