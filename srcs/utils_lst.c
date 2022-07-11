@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:51:29 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 22:50:44 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 18:55:34 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,8 @@ char	**lst_to_strs(t_list *lst)
 		tmp = tmp->next;
 	}
 	strs = malloc(sizeof(char *) * (i + 1));
+	if (!strs)
+		exit(EXIT_FAILURE);
 	strs[i] = NULL;
 	i = 0;
 	while (lst)
@@ -42,6 +44,8 @@ void	env_lstadd_back(t_env **lst, char *key, char *value)
 	t_env	*phead;
 
 	new = (t_env *)malloc(sizeof(t_env));
+	if (!new)
+		exit(EXIT_FAILURE);
 	new->key = key;
 	new->value = value;
 	new->next = NULL;

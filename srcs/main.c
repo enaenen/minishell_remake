@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:28:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 16:03:16 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/11 18:58:01 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,9 +122,9 @@ static int	check_quote_from_tokens(char *str)
 	q_flag = 0;
 	while (str && *str)
 	{
-		if (!(q_flag & D_QUOTE)  && is_quote(*str) == S_QUOTE)
+		if (!(q_flag & D_QUOTE) && is_quote(*str) == S_QUOTE)
 			q_flag ^= S_QUOTE;
-		else if (!(q_flag & S_QUOTE)  && is_quote(*str) == D_QUOTE)
+		else if (!(q_flag & S_QUOTE) && is_quote(*str) == D_QUOTE)
 			q_flag ^= D_QUOTE;
 		str++;
 	}

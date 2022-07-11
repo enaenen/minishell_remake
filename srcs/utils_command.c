@@ -6,7 +6,7 @@
 /*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 16:53:56 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:55:41 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 18:56:04 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static void	cmd_lstadd_back(t_cmd **lst, t_token *tokens)
 	t_cmd	*phead;
 
 	new = malloc(sizeof(t_cmd));
+	if (!new)
+		exit(EXIT_FAILURE);
 	new->tokens = tokens;
 	new->redir = NULL;
 	new->next = NULL;
