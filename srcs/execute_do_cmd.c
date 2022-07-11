@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 00:42:52 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 17:54:01 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/11 18:51:15 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	do_cmd(t_env *env, t_cmd *cmd)
 
 	expand_tokens(env, cmd->tokens);
 	rm_quote_tokens(cmd->tokens);
-	if (cmd->tokens && check_builtin_cmd(cmd->tokens))
+	if (cmd->tokens && cmd->tokens->key && check_builtin_cmd(cmd->tokens))
 		return (do_cmd_builtin(env, cmd));
 	pid = fork();
 	if (pid == -1)

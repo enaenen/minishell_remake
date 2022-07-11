@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_env2.c                                       :+:      :+:    :+:   */
+/*   utils_env_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 02:25:03 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:55:37 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 18:49:36 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ static char	*find_key_and_get_val_str(t_env *env, char **str, char *data)
 	while (data[i] && (ft_isalnum(data[i]) || data[i] == '_'))
 		i++;
 	if (i == 1)
-		*str = ft_substr(data, 0, 2);
+		*str = ft_substr(data++, 0, 2);
 	else
 	{
 		key = ft_substr(data, 1, i - 1);
