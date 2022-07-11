@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 00:42:52 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 15:39:18 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/11 17:54:01 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@ static int	do_cmd_child_exe(char **path, t_env *env, char **args, char **envp)
 			break ;
 		path++;
 	}
+	if (i == 0)
+		execve(ft_strjoin("./", args[0]), args, envp);
 	if (errno != ENOENT)
 		return (error_msg(args[0]));
 	return (error_msg_cmd_not_found(args[0]));
