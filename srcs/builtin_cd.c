@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_cd.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/28 20:05:39 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:56:23 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 13:16:08 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 static int	print_err_no_env(char *env_name);
-static void	cd_error(int error, char *arg);
+static int	cd_error(int error, char *arg);
 static void	refresh_env_pwd(t_env *env_list, char *pwd, char *old_pwd);
 
 int	ft_cd(char **buf, t_env *env_list)
@@ -36,8 +36,8 @@ int	ft_cd(char **buf, t_env *env_list)
 	if (chdir(dir))
 	{
 		error = errno;
-		cd_error(error, dir);
-		return (EXIT_FAILURE);
+		free(old_pwd);
+		return (cd_error(error, dir));
 	}
 	pwd = getcwd(NULL, 0);
 	if (pwd && old_pwd)
@@ -61,7 +61,7 @@ static int	print_err_no_env(char *env_name)
 	return (EXIT_FAILURE);
 }
 
-static void	cd_error(int error, char *arg)
+static int	cd_error(int error, char *arg)
 {
 	char	*errmsg;
 
@@ -71,6 +71,7 @@ static void	cd_error(int error, char *arg)
 	write(2, ": ", 2);
 	write(2, errmsg, ft_strlen(errmsg));
 	write(2, "\n", 1);
+	return (EXIT_FAILURE);
 }
 
 static void	refresh_env_pwd(t_env *env_list, char *pwd, char *old_pwd)
