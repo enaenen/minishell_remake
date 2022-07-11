@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:59:33 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 16:00:33 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@
 # include <sys/errno.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-# include <sys/ioctl.h>
-# include <sys/ttydefaults.h>
+// # include <sys/ioctl.h>
+// # include <sys/ttydefaults.h>
+// # include <dirent.h>
+// # include <curses.h>
 # include <termios.h>
 # include <signal.h>
-# include <dirent.h>
-# include <curses.h>
 # include <errno.h>
 # include "libft.h"
 
+# define TRUE 1
+# define FALSE 0
 # define ERROR -1
 # define S_QUOTE 1
 # define D_QUOTE 2
@@ -70,6 +72,7 @@ int		error_msg(char *msg);
 int		error_msg_cmd_not_found(char *msg);
 int		fd_print_err(char *str);
 int		error_msg_ambiguous(char *str);
+int		error_msg_quote(int q_flag);
 int		export_key_syntax_error(char *s);
 void	ft_kill_exit(void);
 

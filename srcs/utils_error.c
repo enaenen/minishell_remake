@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:12:26 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:55:35 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 16:00:12 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,13 @@ int	fd_print_err(char *str)
 {
 	error_msg(str);
 	return (EXIT_FAILURE);
+}
+
+int	error_msg_quote(int q_flag)
+{
+	if (q_flag == S_QUOTE)
+		write(2, "minishell: syntax error near unexpected token `''\n", 51);
+	else if (q_flag == D_QUOTE)
+		write(2, "minishell: syntax error near unexpected token `\"'\n", 51);
+	return (q_flag);
 }

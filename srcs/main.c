@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:28:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:55:46 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 16:03:16 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static char		*read_input(t_set *set);
 static t_token	*parse_input(char *input);
 static int		check_token(t_token	*tokens);
+static int		check_quote_from_tokens(char *str);
 
 int	main(void)
 {
@@ -65,7 +66,8 @@ static t_token	*parse_input(char *input)
 	int		status;
 
 	tokens = NULL;
-	add_history(input);
+	if (input[0])
+		add_history(input);
 	if (split_token(input, &tokens) == TRUE)
 	{
 		if (check_token(tokens) == 0)
@@ -89,9 +91,6 @@ static t_token	*parse_input(char *input)
 
 static int	check_token(t_token	*tokens)
 {
-	int	i;
-
-	i = 0;
 	while (tokens)
 	{
 		if (tokens->key[0] == '|'
@@ -109,8 +108,25 @@ static int	check_token(t_token	*tokens)
 				|| tokens->next->key[0] == '>' || tokens->next->key[0] == '|')
 				return (error_msg(tokens->next->key));
 		}
-		i++;
+		if (error_msg_quote(check_quote_from_tokens(tokens->key)))
+			return (EXIT_FAILURE);
 		tokens = tokens->next;
 	}
 	return (EXIT_SUCCESS);
+}
+
+static int	check_quote_from_tokens(char *str)
+{
+	int	q_flag;
+
+	q_flag = 0;
+	while (str && *str)
+	{
+		if (!(q_flag & D_QUOTE)  && is_quote(*str) == S_QUOTE)
+			q_flag ^= S_QUOTE;
+		else if (!(q_flag & S_QUOTE)  && is_quote(*str) == D_QUOTE)
+			q_flag ^= D_QUOTE;
+		str++;
+	}
+	return (q_flag);
 }

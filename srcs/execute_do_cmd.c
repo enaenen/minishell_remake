@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_do_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 00:42:52 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:56:01 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 15:39:18 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,12 @@ int	do_cmd_child(t_env *env, t_cmd *cmd)
 	args = tokens_to_strs(cmd->tokens);
 	if (ft_strchr(cmd->tokens->key, '/'))
 		return (do_actual_path_cmd(cmd, args, envp));
-	if (find_env_node(env, "PATH"))
+	else if (find_env_node(env, "PATH"))
 		return (do_cmd_child_exe(path, env, args, envp));
-	return (EXIT_SUCCESS);
+	execve(*args, args, envp);
+	if (!**args)
+		errno = ENOENT;
+	return (error_msg(*args));
 }
 
 int	do_actual_path_cmd(t_cmd *cmd, char **args, char **envp)
