@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_export_1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 18:43:23 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 12:56:08 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 23:06:20 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ static void	get_env_key_val(char **buf, char **key, char **val)
 {
 	char	*eq;
 
+	if (**buf == '=')
+	{
+		*key = ft_strdup(*buf);
+		return ;
+	}
 	eq = ft_strchr(*buf, '=');
 	if (eq)
 	{

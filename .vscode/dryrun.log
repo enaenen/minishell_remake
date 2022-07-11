@@ -4,12 +4,10 @@ make: Entering directory `/Users/seseo/minishell'
  
 make[1]: Entering directory `/Users/seseo/minishell/libft'
 gcc -Wall -Wextra -Werror   -c -o ft_putstr_fd.o ft_putstr_fd.c
- 
 gcc -Wall -Wextra -Werror   -c -o ft_strlen.o ft_strlen.c
 gcc -Wall -Wextra -Werror   -c -o ft_split.o ft_split.c
 gcc -Wall -Wextra -Werror   -c -o ft_strcmp.o ft_strcmp.c
 gcc -Wall -Wextra -Werror   -c -o ft_strtrim.o ft_strtrim.c
- 
 gcc -Wall -Wextra -Werror   -c -o ft_strntrim.o ft_strntrim.c
 gcc -Wall -Wextra -Werror   -c -o ft_substr.o ft_substr.c
 gcc -Wall -Wextra -Werror   -c -o ft_strjoin.o ft_strjoin.c
@@ -24,6 +22,7 @@ gcc -Wall -Wextra -Werror   -c -o ft_isalpha.o ft_isalpha.c
 gcc -Wall -Wextra -Werror   -c -o ft_isalnum.o ft_isalnum.c
 gcc -Wall -Wextra -Werror   -c -o ft_itoa.o ft_itoa.c
 gcc -Wall -Wextra -Werror   -c -o ft_putstr.o ft_putstr.c
+ 
 gcc -Wall -Wextra -Werror   -c -o ft_atoi.o ft_atoi.c
 gcc -Wall -Wextra -Werror   -c -o ft_strnstr.o ft_strnstr.c
 gcc -Wall -Wextra -Werror   -c -o ft_free_split.o ft_free_split.c
@@ -57,6 +56,7 @@ mkdir -p objs
 gcc -Wall -Werror -Wextra -Ilibft -I.  -c srcs/builtin_unset.c -o objs/builtin_unset.o
 mkdir -p objs
 gcc -Wall -Werror -Wextra -Ilibft -I.  -c srcs/expand.c -o objs/expand.o
+ 
 mkdir -p objs
 gcc -Wall -Werror -Wextra -Ilibft -I.  -c srcs/execute_builtin.c -o objs/execute_builtin.o
 mkdir -p objs
@@ -91,7 +91,6 @@ mkdir -p objs
 gcc -Wall -Werror -Wextra -Ilibft -I.  -c srcs/utils_quote_1.c -o objs/utils_quote_1.o
 mkdir -p objs
 gcc -Wall -Werror -Wextra -Ilibft -I.  -c srcs/utils_quote_2.c -o objs/utils_quote_2.o
- 
 mkdir -p objs
 gcc -Wall -Werror -Wextra -Ilibft -I.  -c srcs/utils_fd.c -o objs/utils_fd.o
 mkdir -p objs
@@ -114,38 +113,75 @@ Beginning configuration for readline-8.1 for x86_64-apple-darwin19.6.0
 
 checking whether make sets $(MAKE)...  
 yes
+checking for gcc... gcc
  
-checking for gcc...  
-gcc
+checking whether the C compiler works...  
+yes
  
-checking whether the C compiler works... yes
 checking for C compiler default output file name... a.out
-checking for suffix of executables... 
-checking whether we are cross compiling... no
-checking for suffix of object files... o
-checking whether we are using the GNU C compiler... yes
-checking whether gcc accepts -g... yes
-checking for gcc option to accept ISO C89... none needed
-checking how to run the C preprocessor... gcc -E
-checking for grep that handles long lines and -e... /usr/bin/grep
-checking for egrep... /usr/bin/grep -E
-checking for ANSI C header files... yes
+ 
+checking for suffix of executables...  
+
+ 
+checking whether we are cross compiling...  
+no
+ 
+checking for suffix of object files...  
+o
+checking whether we are using the GNU C compiler...  
+yes
+checking whether gcc accepts -g...  
+yes
+ 
+checking for gcc option to accept ISO C89...  
+none needed
+ 
+checking how to run the C preprocessor...  
+gcc -E
+ 
+checking for grep that handles long lines and -e...  
+/usr/bin/grep
+ 
+checking for egrep...  
+/usr/bin/grep -E
+ 
+checking for ANSI C header files...  
+yes
+ 
 checking for sys/types.h...  
 yes
-checking for sys/stat.h... yes
-checking for stdlib.h... yes
-checking for string.h... yes
-checking for memory.h... yes
-checking for strings.h... yes
-checking for inttypes.h... yes
-checking for stdint.h... yes
-checking for unistd.h... yes
+ 
+checking for sys/stat.h...  
+yes
+ 
+checking for stdlib.h...  
+yes
+ 
+checking for string.h...  
+yes
+ 
+checking for memory.h...  
+yes
+ 
+checking for strings.h...  
+yes
+ 
+checking for inttypes.h...  
+yes
+ 
+checking for stdint.h...  
+yes
+ 
+checking for unistd.h...  
+yes
+ 
 checking minix/config.h usability...  
 no
+ 
 checking minix/config.h presence...  
 no
- 
-checking for minix/config.h... no
+checking for minix/config.h...  
+no
  
 checking whether it is safe to define __EXTENSIONS__...  
 yes
@@ -178,11 +214,12 @@ void
  
 checking for size_t...  
 yes
+ 
 checking for ssize_t...  
 yes
  
-checking for ANSI C header files... (cached)  
-yes
+checking for ANSI C header files...  
+(cached) yes
 checking whether stat file-mode macros are broken...  
 no
  
@@ -194,6 +231,7 @@ none required
  
 checking for fcntl...  
 yes
+ 
 checking for kill...  
 yes
  
@@ -205,7 +243,6 @@ yes
  
 checking for fnmatch...  
 yes
- 
 checking for memmove...  
 yes
  
@@ -254,8 +291,8 @@ yes
 checking for uid_t in sys/types.h...  
 yes
  
-checking for unistd.h...  
-(cached) yes
+checking for unistd.h... (cached)  
+yes
  
 checking for working chown...  
 yes
@@ -267,22 +304,22 @@ checking fcntl.h usability...
 yes
 checking fcntl.h presence...  
 yes
+checking for fcntl.h...  
+yes
  
-checking for fcntl.h... yes
+checking for unistd.h... (cached)  
+yes
  
-checking for unistd.h...  
-(cached) yes
- 
-checking for stdlib.h...  
-(cached) yes
+checking for stdlib.h... (cached)  
+yes
  
 checking varargs.h usability...  
 no
  
 checking varargs.h presence...  
 no
- 
-checking for varargs.h... no
+checking for varargs.h...  
+no
  
 checking stdarg.h usability...  
 yes
@@ -313,11 +350,10 @@ yes
  
 checking locale.h usability...  
 yes
- 
 checking locale.h presence...  
 yes
- 
-checking for locale.h... yes
+checking for locale.h...  
+yes
  
 checking pwd.h usability...  
 yes
@@ -331,24 +367,23 @@ checking for memory.h...
  
 checking termcap.h usability...  
 yes
- 
 checking termcap.h presence...  
 yes
-checking for termcap.h...  
-yes
+ 
+checking for termcap.h... yes
  
 checking termios.h usability...  
 yes
 checking termios.h presence...  
 yes
-checking for termios.h...  
-yes
+ 
+checking for termios.h... yes
  
 checking termio.h usability...  
 no
+ 
 checking termio.h presence...  
 no
- 
 checking for termio.h... no
  
 checking sys/ioctl.h usability...  
@@ -360,6 +395,7 @@ checking for sys/ioctl.h... yes
  
 checking sys/pte.h usability...  
 no
+ 
 checking sys/pte.h presence...  
 no
  
@@ -367,13 +403,14 @@ checking for sys/pte.h... no
  
 checking sys/stream.h usability...  
 no
+ 
 checking sys/stream.h presence...  
 no
- 
 checking for sys/stream.h... no
  
 checking sys/select.h usability...  
 yes
+ 
 checking sys/select.h presence...  
 yes
  
@@ -381,10 +418,11 @@ checking for sys/select.h... yes
  
 checking sys/file.h usability...  
 yes
+ 
 checking sys/file.h presence...  
 yes
-checking for sys/file.h...  
-yes
+ 
+checking for sys/file.h... yes
  
 checking for sys/ptem.h...  
 no
@@ -399,7 +437,6 @@ posix
  
 checking if signal handlers must be reinstalled when invoked...  
 no
- 
 checking for presence of POSIX-style sigsetjmp/siglongjmp...  
 present
  
@@ -420,7 +457,6 @@ yes
  
 checking for sig_atomic_t in signal.h...  
 yes
- 
 checking whether signal handlers are of type void...  
 yes
  
@@ -444,10 +480,11 @@ yes
  
 checking libaudit.h usability...  
 no
+ 
 checking libaudit.h presence...  
 no
-checking for libaudit.h...  
-no
+ 
+checking for libaudit.h... no
  
 checking whether AUDIT_USER_TTY is declared...  
 no
@@ -463,13 +500,15 @@ using libtermcap
  
 checking wctype.h usability...  
 yes
+ 
 checking wctype.h presence...  
 yes
-checking for wctype.h...  
-yes
+ 
+checking for wctype.h... yes
  
 checking wchar.h usability...  
 yes
+ 
 checking wchar.h presence...  
 yes
  
@@ -477,13 +516,15 @@ checking for wchar.h... yes
  
 checking langinfo.h usability...  
 yes
+ 
 checking langinfo.h presence...  
 yes
-checking for langinfo.h...  
-yes
+ 
+checking for langinfo.h... yes
  
 checking mbstr.h usability...  
 no
+ 
 checking mbstr.h presence...  
 no
 checking for mbstr.h...  
@@ -548,39 +589,59 @@ yes
  
 checking for wchar_t in wchar.h...  
 yes
- 
 checking for wctype_t in wctype.h...  
-yes
- 
-checking for wint_t in wctype.h...  
-yes
- 
-checking for wcwidth broken with unicode combining characters...  
+cat: 
+stdout: No space left on device
+
+./configure: line 1466: conftest.err: No space left on device
+./configure: line 6704: conftest.c: No space left on device
+./configure: line 1466: conftest.err: No space left on device
+sed: conftest.c: No such file or directory
+./configure: line 6741: conftest.c: No space left on device
+sed: conftest.c: No such file or directory
+./configure: line 2046: conftest.c: No space left on device
+sed: conftest.c: No such file or directory
+
 no
+checking for wint_t in wctype.h... no
+checking for wcwidth broken with unicode combining characters... no
+checking size of wchar_t... 0
+checking configuration for building shared libraries...  
+supported
  
-checking size of wchar_t...  
-4
-checking configuration for building shared libraries... supported
- 
+./configure: line 6948: confcache: No space left on device
+
+./configure: line 7009: confcache: No space left on device
+
 configure: creating ./config.status
  
-CONFIG_FILES=Makefile CONFIG_HEADERS= /bin/sh ./config.status
- 
-config.status: creating Makefile
- 
-config.status: executing default commands
- 
-make[1]: Leaving directory `/Users/seseo/minishell/readline'
- 
-make[1]: Entering directory `/Users/seseo/minishell/readline'
+cat: stdout: No space left on device
+
+cat: stdout: No space left on device
+
+cat: stdout: No space left on device
+cat: stdout: No space left on device
+./configure: line 7721: conf1499subs.sh: No space left on device
+configure: error: could not make ./config.status
+./configure: line 352: echo: write error: No space left on device
+./configure: line 356: printf: write error: No space left on device
+./configure: line 357: echo: write error: No space left on device
+./configure: line 366: echo: write error: No space left on device
+./configure: line 387: printf: write error: No space left on device
+./configure: line 388: echo: write error: No space left on device
+cat: stdout: No space left on device
+./configure: line 390: echo: write error: No space left on device
+./configure: line 394: printf: write error: No space left on device
+make[1]: *** [config.status] Error 1
+
+make[1]: Failed to remake makefile `Makefile'.
+
 rm -f readline.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security readline.c
- 
 rm -f vi_mode.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security vi_mode.c
 rm -f funmap.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security funmap.c
- 
 rm -f keymaps.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security keymaps.c
 rm -f parens.o
@@ -595,7 +656,6 @@ rm -f bind.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security bind.c
 rm -f isearch.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security isearch.c
- 
 rm -f display.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security display.c
 rm -f signals.o
@@ -610,7 +670,6 @@ rm -f macro.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security macro.c
 rm -f input.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security input.c
- 
 rm -f callback.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security callback.c
 rm -f terminal.o
@@ -625,7 +684,6 @@ rm -f history.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security history.c
 rm -f histexpand.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security histexpand.c
- 
 rm -f histfile.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security histfile.c
 rm -f histsearch.o
@@ -642,7 +700,6 @@ rm -f parse-colors.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security parse-colors.c
 rm -f xmalloc.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security xmalloc.c
- 
 rm -f xfree.o
 gcc -c  -DHAVE_CONFIG_H   -I. -I.  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security xfree.c
 rm -f compat.o
@@ -658,20 +715,18 @@ test -d shlib || mkdir shlib
  
 make[2]: Entering directory `/Users/seseo/minishell/readline/shlib'
 rm -f readline.so
+ 
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o readline.o ../readline.c 
 mv readline.o readline.so
- 
 rm -f vi_mode.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o vi_mode.o ../vi_mode.c 
 mv vi_mode.o vi_mode.so
- 
 rm -f funmap.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o funmap.o ../funmap.c 
 mv funmap.o funmap.so
 rm -f keymaps.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o keymaps.o ../keymaps.c 
 mv keymaps.o keymaps.so
- 
 rm -f parens.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o parens.o ../parens.c 
 mv parens.o parens.so
@@ -684,7 +739,6 @@ mv rltty.o rltty.so
 rm -f complete.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o complete.o ../complete.c 
 mv complete.o complete.so
- 
 rm -f bind.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o bind.o ../bind.c 
 mv bind.o bind.so
@@ -700,7 +754,6 @@ mv signals.o signals.so
 rm -f util.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o util.o ../util.c 
 mv util.o util.so
- 
 rm -f kill.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o kill.o ../kill.c 
 mv kill.o kill.so
@@ -717,7 +770,6 @@ rm -f callback.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o callback.o ../callback.c 
 mv callback.o callback.so
 rm -f terminal.so
- 
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o terminal.o ../terminal.c 
 mv terminal.o terminal.so
 rm -f text.so
@@ -735,7 +787,6 @@ mv history.o history.so
 rm -f histexpand.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o histexpand.o ../histexpand.c 
 mv histexpand.o histexpand.so
- 
 rm -f histfile.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o histfile.o ../histfile.c 
 mv histfile.o histfile.so
@@ -753,7 +804,6 @@ gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED
 mv tilde.o tilde.so
 rm -f colors.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o colors.o ../colors.c 
- 
 mv colors.o colors.so
 rm -f parse-colors.so
 gcc -c -DHAVE_CONFIG_H   -I. -I.. -I..  -DRL_LIBRARY_VERSION='"8.1"' -DBRACKETED_PASTE_DEFAULT=1 -g -O2 -Wno-parentheses -Wno-format-security -fno-common -o parse-colors.o ../parse-colors.c 
@@ -770,11 +820,11 @@ mv compat.o compat.so
 rm -f libreadline.8.1.dylib
 gcc -dynamiclib -dynamic -undefined dynamic_lookup  -dynamiclib -install_name /usr/local/lib/`echo libreadline.8.1.dylib | sed "s:\..*::"`.8.dylib -current_version 8.1 -compatibility_version 8.1 -v -o libreadline.8.1.dylib readline.so vi_mode.so funmap.so keymaps.so parens.so search.so rltty.so complete.so bind.so isearch.so display.so signals.so util.so kill.so undo.so macro.so input.so callback.so terminal.so text.so nls.so misc.so history.so histexpand.so histfile.so histsearch.so shell.so mbutil.so tilde.so colors.so parse-colors.so xmalloc.so xfree.so compat.so -lncurses
 rm -f libhistory.8.1.dylib
+ 
 gcc -dynamiclib -dynamic -undefined dynamic_lookup  -dynamiclib -install_name /usr/local/lib/`echo libhistory.8.1.dylib | sed "s:\..*::"`.8.dylib -current_version 8.1 -compatibility_version 8.1 -v -o libhistory.8.1.dylib history.so histexpand.so histfile.so histsearch.so shell.so mbutil.so xmalloc.so xfree.so -lncurses
 make[2]: Leaving directory `/Users/seseo/minishell/readline/shlib'
- 
 make[1]: Leaving directory `/Users/seseo/minishell/readline'
- 
-gcc -Wall -Werror -Wextra -Ilibft -I. -Llibft -lft -Lreadline -lreadline -lhistory -lncurses objs/main.o objs/builtin_echo.o objs/builtin_pwd.o objs/builtin_exit.o objs/builtin_cd.o objs/builtin_env.o objs/builtin_export_1.o objs/builtin_export_2.o objs/builtin_unset.o objs/expand.o objs/execute_builtin.o objs/execute_pipe.o objs/execute.o objs/execute_do_cmd.o objs/handle_redirect_apply.o objs/handle_redirect_set.o objs/handle_signal.o objs/heredoc.o objs/settings.o objs/split_token.o objs/utils_command.o objs/utils_error.o objs/utils_env_1.o objs/utils_env_2.o objs/utils_lst.o objs/utils_quote_1.o objs/utils_quote_2.o objs/utils_fd.o objs/utils_exe.o -o minishell
 make: Leaving directory `/Users/seseo/minishell'
  
+make: *** [readline/libreadline.a] Error 2
+

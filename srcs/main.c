@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 16:28:59 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 18:58:01 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/11 22:52:47 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ int	main(void)
 		tcsetattr(STDOUT_FILENO, TCSANOW, &set.new_term);
 		input = read_input(&set);
 		tokens = parse_input(input);
-		tcsetattr(STDOUT_FILENO, TCSANOW, &set.org_term);
 		if (!tokens)
-		{
 			input = ft_free(input);
-			continue ;
+		else
+		{
+			tcsetattr(STDOUT_FILENO, TCSANOW, &set.org_term);
+			signal(SIGINT, &sig_exec);
+			signal(SIGQUIT, &sig_exec);
+			g_status = do_exec_function(env, tokens);
+			input = ft_free(input);
 		}
-		signal(SIGINT, &sig_exec);
-		signal(SIGQUIT, &sig_exec);
-		g_status = do_exec_function(env, tokens);
-		input = ft_free(input);
 	}
 	return (0);
 }
@@ -70,19 +70,18 @@ static t_token	*parse_input(char *input)
 		add_history(input);
 	if (split_token(input, &tokens) == TRUE)
 	{
-		if (check_token(tokens) == 0)
-		{
-			status = process_heredoc(tokens);
-			if (status)
-			{
-				del_env_lst(tokens);
-				g_status = status;
-				return (NULL);
-			}
-		}
-		else
+		status = check_token(tokens);
+		if (status)
 		{
 			del_env_lst(tokens);
+			g_status = status;
+			return (NULL);
+		}
+		status = process_heredoc(tokens);
+		if (status)
+		{
+			del_env_lst(tokens);
+			g_status = status;
 			return (NULL);
 		}
 	}

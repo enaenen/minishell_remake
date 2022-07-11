@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 17:12:26 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 16:00:12 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/11 22:41:34 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	error_msg(char *msg)
 	if (!msg)
 	{
 		write(2, "syntax error near unexpected token 'newline'\n", 45);
-		return (EXIT_FAILURE);
+		return (258);
 	}
 	else if (msg[0] == '|' || msg[0] == '<' || msg[0] == '>')
 	{
 		write(2, "syntax error near unexpected token '", 36);
 		write(2, msg, ft_strlen(msg));
 		write(2, "'\n", 2);
-		return (ERROR);
+		return (258);
 	}
 	write(2, msg, ft_strlen(msg));
 	write(2, ": ", 2);
