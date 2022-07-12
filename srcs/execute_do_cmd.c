@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_do_cmd.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/11 00:42:52 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/12 14:12:40 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/12 16:00:46 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,8 @@ static int	do_cmd_child_exe(char **path, t_env *env, char **args, char **envp)
 
 	path = ft_split(find_env_node(env, "PATH")->value, ':');
 	i = 0;
+	if (*args && **args == 0)
+		return (error_msg_cmd_not_found(args[0]));
 	while (path[i])
 	{
 		path[i] = ft_strjoin(path[i], "/");
