@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_quote.c                                      :+:      :+:    :+:   */
+/*   utils_quote_1.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 16:45:43 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/10 23:04:43 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/12 15:16:56 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static int	quote_closed_check(char *data, int q_flag);
 
 int	is_quote(char c)
 {
@@ -23,26 +25,49 @@ int	is_quote(char c)
 
 char	*skip_quote(t_buffer *buf, char *data, int q_flag)
 {
-	data++;
-	while (is_quote(*data) != q_flag)
+	if (quote_closed_check(data, q_flag))
 	{
-		add_char(buf, *data);
 		data++;
+		while (is_quote(*data) != q_flag)
+		{
+			add_char(buf, *data);
+			data++;
+		}
 	}
+	else
+		add_char(buf, *data);
 	return (data);
 }
 
 char	*skip_quote_2(t_buffer *buf, char *data, int q_flag)
 {
-	add_char(buf, *data);
-	data++;
-	while (is_quote(*data) != q_flag)
+	if (quote_closed_check(data, q_flag))
 	{
 		add_char(buf, *data);
 		data++;
+		while (is_quote(*data) != q_flag)
+		{
+			add_char(buf, *data);
+			data++;
+		}
+		add_char(buf, *data);
 	}
-	add_char(buf, *data);
+	else
+		add_char(buf, *data);
 	return (data);
+}
+
+static int	quote_closed_check(char *data, int q_flag)
+{
+	int	i;
+
+	i = 1;
+	while (data[i])
+	{
+		if (is_quote(data[i++]) == q_flag)
+			return (TRUE);
+	}
+	return (FALSE);
 }
 
 char	*rm_quote(char *data)
@@ -60,20 +85,7 @@ char	*rm_quote(char *data)
 		data++;
 	}
 	str = put_str(buf);
+	printf("rm_quote : %s\n", str);
 	del_buf(buf);
 	return (str);
-}
-
-void	rm_quote_tokens(t_token *tokens)
-{
-	char	*tmp;
-
-	while (tokens)
-	{
-		tmp = tokens->key;
-		if (tmp)
-			tokens->key = rm_quote(tmp);
-		free(tmp);
-		tokens = tokens->next;
-	}
 }

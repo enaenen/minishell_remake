@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_quote_2.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 19:28:10 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 18:55:50 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/12 15:16:42 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,4 +72,18 @@ char	**split_cmd(t_list *cmd)
 	}
 	exe[i] = NULL;
 	return (exe);
+}
+
+void	rm_quote_tokens(t_token *tokens)
+{
+	char	*tmp;
+
+	while (tokens)
+	{
+		tmp = tokens->key;
+		if (tmp)
+			tokens->key = rm_quote(tmp);
+		free(tmp);
+		tokens = tokens->next;
+	}
 }
