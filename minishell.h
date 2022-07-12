@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
+/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/11 17:08:37 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 16:00:33 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/12 14:05:43 by wchae            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,6 @@
 # include <sys/errno.h>
 # include <readline/history.h>
 # include <readline/readline.h>
-// # include <sys/ioctl.h>
-// # include <sys/ttydefaults.h>
-// # include <dirent.h>
-// # include <curses.h>
 # include <termios.h>
 # include <signal.h>
 # include <errno.h>
