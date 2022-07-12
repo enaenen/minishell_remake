@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_lst.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: wchae <wchae@student.42.fr>                +#+  +:+       +#+        */
+/*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/27 23:51:29 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/11 18:55:34 by wchae            ###   ########.fr       */
+/*   Updated: 2022/07/12 15:44:36 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ char	**tokens_to_strs(t_token *tokens)
 	tmp = tokens;
 	while (tmp)
 	{
+		if (tmp->key)
+			i++;
 		tmp = tmp->next;
-		i++;
 	}
 	strs = malloc(sizeof(char *) * (i + 1));
 	if (strs == NULL)
@@ -95,7 +96,8 @@ char	**tokens_to_strs(t_token *tokens)
 	i = 0;
 	while (tokens)
 	{
-		strs[i++] = ft_strdup(tokens->key);
+		if (tokens->key)
+			strs[i++] = ft_strdup(tokens->key);
 		tokens = tokens->next;
 	}
 	return (strs);

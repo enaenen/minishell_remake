@@ -6,7 +6,7 @@
 /*   By: seseo <seseo@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/09 16:45:43 by wchae             #+#    #+#             */
-/*   Updated: 2022/07/12 15:16:56 by seseo            ###   ########.fr       */
+/*   Updated: 2022/07/12 15:45:18 by seseo            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ char	*rm_quote(char *data)
 		data++;
 	}
 	str = put_str(buf);
-	printf("rm_quote : %s\n", str);
 	del_buf(buf);
 	return (str);
 }
