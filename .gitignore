@@ -3,4 +3,4 @@
 *.a
 
 minishell
-.DS_Store
+*.DS_Store
